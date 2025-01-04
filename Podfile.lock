@@ -1,0 +1,26 @@
+PODS:
+  - Sketch (3.1)
+  - SnapKit (5.7.1)
+  - ZLPhotoBrowser (4.5.7):
+    - ZLPhotoBrowser/Core (= 4.5.7)
+  - ZLPhotoBrowser/Core (4.5.7)
+
+DEPENDENCIES:
+  - Sketch
+  - SnapKit (~> 5.7.0)
+  - ZLPhotoBrowser
+
+SPEC REPOS:
+  trunk:
+    - Sketch
+    - SnapKit
+    - ZLPhotoBrowser
+
+SPEC CHECKSUMS:
+  Sketch: db5a2d1de16fbf1fbdf57343a89c99b64b33ecf1
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+  ZLPhotoBrowser: 04c8a5c5299a3b5945c60bd0e676c16d1215b14c
+
+PODFILE CHECKSUM: 47180303c3f64b6ddcc2855a946719b9ef9f3d5d
+
+COCOAPODS: 1.16.2
