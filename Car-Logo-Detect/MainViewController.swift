@@ -17,7 +17,7 @@ class ViewController: UIViewController {
         let title = UILabel()
         title.text = "Car Logo Detect"
         title.textAlignment = .center
-        title.font = UIFont.boldSystemFont(ofSize: 32)
+        title.font = UIFont.boldSystemFont(ofSize: 48)
         title.backgroundColor = .yellow
         return title
     }()
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         
         cameraButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(mainTitle).offset(200)
+            make.top.equalTo(mainTitle).offset(300)
             make.width.equalTo(200)
         }
         

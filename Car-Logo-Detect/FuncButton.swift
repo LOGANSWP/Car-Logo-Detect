@@ -16,7 +16,7 @@ class FuncButton: UIButton {
     init(funcType: FunctionType, frame: CGRect = .zero) {
         super.init(frame: frame)
         self.setTitle(funcType.titleName, for: .normal)
-        self.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 24)
         self.backgroundColor = funcType.bgColor
         
         self.rx.tap

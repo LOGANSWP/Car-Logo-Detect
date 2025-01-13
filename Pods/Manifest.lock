@@ -1,4 +1,7 @@
 PODS:
+  - LookinServer (1.2.8):
+    - LookinServer/Core (= 1.2.8)
+  - LookinServer/Core (1.2.8)
   - RxCocoa (6.8.0):
     - RxRelay (= 6.8.0)
     - RxSwift (= 6.8.0)
@@ -12,6 +15,7 @@ PODS:
   - ZLPhotoBrowser/Core (4.5.7)
 
 DEPENDENCIES:
+  - LookinServer
   - RxCocoa (= 6.8.0)
   - RxSwift (= 6.8.0)
   - Sketch
@@ -20,6 +24,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - LookinServer
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -28,6 +33,7 @@ SPEC REPOS:
     - ZLPhotoBrowser
 
 SPEC CHECKSUMS:
+  LookinServer: 1b2b61c6402ae29fa22182d48f5cd067b4e99e80
   RxCocoa: 2d33c1e1e5d66492052ad46b11024ae287572880
   RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705
   RxSwift: 4e28be97cbcfeee614af26d83415febbf2bf6f45
@@ -35,6 +41,6 @@ SPEC CHECKSUMS:
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   ZLPhotoBrowser: 04c8a5c5299a3b5945c60bd0e676c16d1215b14c
 
-PODFILE CHECKSUM: b3df3fc7a9644688c21df1af82e0a214d1f70de3
+PODFILE CHECKSUM: ef0bc19ee6219288065e60308e821bf7930de321
 
 COCOAPODS: 1.16.2

@@ -10,7 +10,7 @@ target 'Car-Logo-Detect' do
   pod 'ZLPhotoBrowser'
   pod 'RxSwift', '6.8.0'
   pod 'RxCocoa', '6.8.0'
-
+  pod 'LookinServer', :configurations => ['Debug']
   # Pods for Car-Logo-Detect
 
 end
