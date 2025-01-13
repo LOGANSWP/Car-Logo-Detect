@@ -21,39 +21,19 @@ class ViewController: UIViewController {
         title.backgroundColor = .yellow
         return title
     }()
-    
-    private lazy var cameraButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Camera", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.backgroundColor = .blue
-        return button
-    }()
-    
-    private lazy var photosButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Photos", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.backgroundColor = .brown
-        return button
-    }()
-    
-    private lazy var drawButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("Draw", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.backgroundColor = .red
-        return button
-    }()
+        
+    private lazy var cameraButton = FuncButton(funcType: .camera)
+    private lazy var photosButton = FuncButton(funcType: .photos)
+    private lazy var drawButton = FuncButton(funcType: .draw)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        setupBindings()
     }
 
     private func setupViews() {
         view.backgroundColor = .white
+        
         view.addSubview(mainTitle)
         view.addSubview(cameraButton)
         view.addSubview(photosButton)
@@ -81,25 +61,5 @@ class ViewController: UIViewController {
             make.top.equalTo(photosButton).offset(100)
             make.width.equalTo(200)
         }
-    }
-    
-    private func setupBindings() {
-        cameraButton.rx.tap
-            .subscribe(onNext: {
-                print("Tap Camera Button")
-            })
-            .disposed(by: disposeBag)
-        
-        photosButton.rx.tap
-            .subscribe(onNext: {
-                print("Tap Photos Button")
-            })
-            .disposed(by: disposeBag)
-        
-        drawButton.rx.tap
-            .subscribe(onNext: {
-                print("Tap Draw Button")
-            })
-            .disposed(by: disposeBag)
     }
 }

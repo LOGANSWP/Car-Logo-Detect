@@ -13,6 +13,11 @@
 		23CC40A02D28FE7A00DB119B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23CC409F2D28FE7A00DB119B /* Assets.xcassets */; };
 		23CC40A32D28FE7A00DB119B /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 23CC40A22D28FE7A00DB119B /* Base */; };
 		48D7104625027B6343891612 /* Pods_Car_Logo_Detect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7EA77EBA0764EB6C76756DD /* Pods_Car_Logo_Detect.framework */; };
+		A75E64E62D350BA500E30C50 /* FunctionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64E52D350BA500E30C50 /* FunctionType.swift */; };
+		A75E64E82D350D9500E30C50 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64E72D350D9500E30C50 /* CameraViewController.swift */; };
+		A75E64EA2D350DC000E30C50 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64E92D350DC000E30C50 /* PhotosViewController.swift */; };
+		A75E64EC2D350DDE00E30C50 /* DrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64EB2D350DDE00E30C50 /* DrawViewController.swift */; };
+		A75E64EE2D350EA900E30C50 /* FuncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64ED2D350EA900E30C50 /* FuncButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +30,11 @@
 		23CC40A42D28FE7A00DB119B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54167AD410BE3C8FF21812CF /* Pods-Car-Logo-Detect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Car-Logo-Detect.release.xcconfig"; path = "Target Support Files/Pods-Car-Logo-Detect/Pods-Car-Logo-Detect.release.xcconfig"; sourceTree = "<group>"; };
 		68A61A7F55FD7464AFBC494C /* Pods-Car-Logo-Detect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Car-Logo-Detect.debug.xcconfig"; path = "Target Support Files/Pods-Car-Logo-Detect/Pods-Car-Logo-Detect.debug.xcconfig"; sourceTree = "<group>"; };
+		A75E64E52D350BA500E30C50 /* FunctionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionType.swift; sourceTree = "<group>"; };
+		A75E64E72D350D9500E30C50 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		A75E64E92D350DC000E30C50 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		A75E64EB2D350DDE00E30C50 /* DrawViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawViewController.swift; sourceTree = "<group>"; };
+		A75E64ED2D350EA900E30C50 /* FuncButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuncButton.swift; sourceTree = "<group>"; };
 		F7EA77EBA0764EB6C76756DD /* Pods_Car_Logo_Detect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Car_Logo_Detect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -72,6 +82,11 @@
 				23CC40962D28FE7A00DB119B /* AppDelegate.swift */,
 				23CC40982D28FE7A00DB119B /* SceneDelegate.swift */,
 				23CC409A2D28FE7A00DB119B /* MainViewController.swift */,
+				A75E64E52D350BA500E30C50 /* FunctionType.swift */,
+				A75E64E72D350D9500E30C50 /* CameraViewController.swift */,
+				A75E64E92D350DC000E30C50 /* PhotosViewController.swift */,
+				A75E64EB2D350DDE00E30C50 /* DrawViewController.swift */,
+				A75E64ED2D350EA900E30C50 /* FuncButton.swift */,
 				23CC409F2D28FE7A00DB119B /* Assets.xcassets */,
 				23CC40A12D28FE7A00DB119B /* LaunchScreen.storyboard */,
 				23CC40A42D28FE7A00DB119B /* Info.plist */,
@@ -203,6 +218,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				23CC409B2D28FE7A00DB119B /* MainViewController.swift in Sources */,
+				A75E64E82D350D9500E30C50 /* CameraViewController.swift in Sources */,
+				A75E64E62D350BA500E30C50 /* FunctionType.swift in Sources */,
+				A75E64EE2D350EA900E30C50 /* FuncButton.swift in Sources */,
+				A75E64EA2D350DC000E30C50 /* PhotosViewController.swift in Sources */,
+				A75E64EC2D350DDE00E30C50 /* DrawViewController.swift in Sources */,
 				23CC40972D28FE7A00DB119B /* AppDelegate.swift in Sources */,
 				23CC40992D28FE7A00DB119B /* SceneDelegate.swift in Sources */,
 			);
