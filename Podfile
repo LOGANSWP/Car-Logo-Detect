@@ -7,7 +7,9 @@ target 'Car-Logo-Detect' do
 
   pod 'SnapKit', '~> 5.7.0'
   pod 'Sketch'
-  pod 'ZLPhotoBrowser'  
+  pod 'ZLPhotoBrowser'
+  pod 'RxSwift', '6.8.0'
+  pod 'RxCocoa', '6.8.0'
 
   # Pods for Car-Logo-Detect
 

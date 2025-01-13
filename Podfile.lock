@@ -1,4 +1,10 @@
 PODS:
+  - RxCocoa (6.8.0):
+    - RxRelay (= 6.8.0)
+    - RxSwift (= 6.8.0)
+  - RxRelay (6.8.0):
+    - RxSwift (= 6.8.0)
+  - RxSwift (6.8.0)
   - Sketch (3.1)
   - SnapKit (5.7.1)
   - ZLPhotoBrowser (4.5.7):
@@ -6,21 +12,29 @@ PODS:
   - ZLPhotoBrowser/Core (4.5.7)
 
 DEPENDENCIES:
+  - RxCocoa (= 6.8.0)
+  - RxSwift (= 6.8.0)
   - Sketch
   - SnapKit (~> 5.7.0)
   - ZLPhotoBrowser
 
 SPEC REPOS:
   trunk:
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - Sketch
     - SnapKit
     - ZLPhotoBrowser
 
 SPEC CHECKSUMS:
+  RxCocoa: 2d33c1e1e5d66492052ad46b11024ae287572880
+  RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705
+  RxSwift: 4e28be97cbcfeee614af26d83415febbf2bf6f45
   Sketch: db5a2d1de16fbf1fbdf57343a89c99b64b33ecf1
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   ZLPhotoBrowser: 04c8a5c5299a3b5945c60bd0e676c16d1215b14c
 
-PODFILE CHECKSUM: 47180303c3f64b6ddcc2855a946719b9ef9f3d5d
+PODFILE CHECKSUM: b3df3fc7a9644688c21df1af82e0a214d1f70de3
 
 COCOAPODS: 1.16.2
