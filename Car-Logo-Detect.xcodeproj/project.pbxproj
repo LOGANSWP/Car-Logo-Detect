@@ -79,13 +79,11 @@
 		23CC40952D28FE7A00DB119B /* Car-Logo-Detect */ = {
 			isa = PBXGroup;
 			children = (
+				A75E64EF2D35247400E30C50 /* Functions */,
 				23CC40962D28FE7A00DB119B /* AppDelegate.swift */,
 				23CC40982D28FE7A00DB119B /* SceneDelegate.swift */,
 				23CC409A2D28FE7A00DB119B /* MainViewController.swift */,
 				A75E64E52D350BA500E30C50 /* FunctionType.swift */,
-				A75E64E72D350D9500E30C50 /* CameraViewController.swift */,
-				A75E64E92D350DC000E30C50 /* PhotosViewController.swift */,
-				A75E64EB2D350DDE00E30C50 /* DrawViewController.swift */,
 				A75E64ED2D350EA900E30C50 /* FuncButton.swift */,
 				23CC409F2D28FE7A00DB119B /* Assets.xcassets */,
 				23CC40A12D28FE7A00DB119B /* LaunchScreen.storyboard */,
@@ -101,6 +99,16 @@
 				54167AD410BE3C8FF21812CF /* Pods-Car-Logo-Detect.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		A75E64EF2D35247400E30C50 /* Functions */ = {
+			isa = PBXGroup;
+			children = (
+				A75E64E72D350D9500E30C50 /* CameraViewController.swift */,
+				A75E64E92D350DC000E30C50 /* PhotosViewController.swift */,
+				A75E64EB2D350DDE00E30C50 /* DrawViewController.swift */,
+			);
+			path = Functions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
