@@ -7,17 +7,30 @@
 
 import Foundation
 import UIKit
+import PencilKit
 
-class DrawViewController: UIViewController {
+class DrawViewController: UIViewController, PKCanvasViewDelegate, PKToolPickerObserver {
+    private lazy var canvasView = PKCanvasView()
+    private lazy var toolPicker = PKToolPicker()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        canvasView.delegate = self
+        canvasView.alwaysBounceVertical = true
+        canvasView.drawingPolicy = .anyInput
+        
+        toolPicker.setVisible(true, forFirstResponder: canvasView)
+        toolPicker.addObserver(canvasView)
+        canvasView.becomeFirstResponder()
+        
         setupNavigationBar()
+        setupViews()
         view.backgroundColor = .white
     }
     
     private func setupNavigationBar() {
         // 设置标题
-        title = "Draw"
+        title = "Drawing Board"
         
         // 设置左侧返回按钮
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
@@ -26,6 +39,14 @@ class DrawViewController: UIViewController {
         // 设置右侧保存按钮
         let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
         navigationItem.rightBarButtonItem = saveButton
+    }
+    
+    private func setupViews() {
+        view.addSubview(canvasView)
+        
+        canvasView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     @objc private func backButtonTapped() {
