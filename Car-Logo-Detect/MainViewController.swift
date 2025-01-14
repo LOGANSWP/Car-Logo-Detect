@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import ZLPhotoBrowser
 
 class MainViewController: UIViewController {
     private let disposeBag = DisposeBag()
@@ -46,16 +47,13 @@ class MainViewController: UIViewController {
         return alertController
     }()
         
-    private lazy var cameraButton = FuncButton(funcType: .camera)
     private lazy var photosButton = FuncButton(funcType: .photos)
     private lazy var drawButton = FuncButton(funcType: .draw)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cameraButton.delegate = self
-        photosButton.delegate = self
-        drawButton.delegate = self
         setupViews()
+        setupBindings()
     }
 
     private func setupViews() {
@@ -63,7 +61,6 @@ class MainViewController: UIViewController {
         
         view.addSubview(mainTitle)
         view.addSubview(aboutButton)
-        view.addSubview(cameraButton)
         view.addSubview(photosButton)
         view.addSubview(drawButton)
         
@@ -77,15 +74,9 @@ class MainViewController: UIViewController {
             make.top.equalTo(mainTitle).offset(100)
         }
         
-        cameraButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(mainTitle).offset(300)
-            make.width.equalTo(200)
-        }
-        
         photosButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(cameraButton).offset(100)
+            make.top.equalTo(mainTitle).offset(300)
             make.width.equalTo(200)
         }
         
@@ -95,10 +86,24 @@ class MainViewController: UIViewController {
             make.width.equalTo(200)
         }
     }
-}
-
-extension MainViewController: FuncButtonTapDelegate {
-    func tapFuncButton(type: FunctionType) {
-        navigationController?.pushViewController(type.gotoViewController.init(), animated: true)
+    
+    private func setupBindings() {
+        photosButton.rx.tap
+            .subscribe(onNext: {
+                let ps = ZLPhotoPreviewSheet()
+                ps.selectImageBlock = { [weak self] results, isOriginal in
+                    guard let self else { return }
+                    present(PreviewViewController(image: results[0].image), animated: true)
+                }
+                ps.showPhotoLibrary(sender: self)
+            })
+            .disposed(by: disposeBag)
+        
+        drawButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self else { return }
+                navigationController?.pushViewController(DrawViewController(), animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }

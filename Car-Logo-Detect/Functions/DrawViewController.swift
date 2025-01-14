@@ -38,8 +38,8 @@ class DrawViewController: UIViewController, PKCanvasViewDelegate, PKToolPickerOb
         // Set upleft back button
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
         
-        // Set upright save button
-        let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
+        // Set upright Confirm button
+        let confirmButton = UIBarButtonItem(title: "Confirm", style: .plain, target: self, action: #selector(confirmButtonTapped))
         
         // Undo button
         let undoButton = UIBarButtonItem(title: "Undo", style: .plain, target: self, action: #selector(undoTapped))
@@ -47,7 +47,7 @@ class DrawViewController: UIViewController, PKCanvasViewDelegate, PKToolPickerOb
         // Redo button
         let redoButton = UIBarButtonItem(title: "Redo", style: .plain, target: self, action: #selector(redoTapped))
         
-        navigationItem.leftBarButtonItems = [backButton, saveButton] // Order: Back -> Save
+        navigationItem.leftBarButtonItems = [backButton, confirmButton] // Order: Back -> Confirm
         navigationItem.rightBarButtonItems = [redoButton, undoButton] // Order: Redo -> Undo
     }
 
@@ -63,28 +63,12 @@ class DrawViewController: UIViewController, PKCanvasViewDelegate, PKToolPickerOb
         navigationController?.popViewController(animated: true)
     }
     
-    @objc private func saveButtonTapped() {
+    @objc private func confirmButtonTapped() {
         // Generate UIImage from PKCanvasView's drawing property
         let drawing = canvasView.drawing
         let image = drawing.image(from: canvasView.bounds, scale: UIScreen.main.scale)
         
-        // Save UIImage to local photos
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
-    }
-
-    // Save callback method
-    @objc private func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
-            // Error
-            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true, completion: nil)
-        } else {
-            // Succeed
-            let alert = UIAlertController(title: "Saved", message: "Your drawing has been saved to Photos.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true, completion: nil)
-        }
+        present(PreviewViewController(image: image), animated: true)
     }
     
     @objc private func undoTapped() {
