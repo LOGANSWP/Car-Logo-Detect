@@ -36,16 +36,16 @@ class DrawViewController: UIViewController, PKCanvasViewDelegate, PKToolPickerOb
         title = "Drawing Board"
         
         // Set upleft back button
-        let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.circle"), style: .plain, target: self, action: #selector(backButtonTapped))
         
         // Set upright Confirm button
-        let confirmButton = UIBarButtonItem(title: "Confirm", style: .plain, target: self, action: #selector(confirmButtonTapped))
+        let confirmButton = UIBarButtonItem(image: UIImage(systemName: "square.and.arrow.down.on.square"), style: .plain, target: self, action: #selector(confirmButtonTapped))
         
         // Undo button
-        let undoButton = UIBarButtonItem(title: "Undo", style: .plain, target: self, action: #selector(undoTapped))
+        let undoButton = UIBarButtonItem(image: UIImage(systemName: "arrow.uturn.backward.circle"), style: .plain, target: self, action: #selector(undoTapped))
         
         // Redo button
-        let redoButton = UIBarButtonItem(title: "Redo", style: .plain, target: self, action: #selector(redoTapped))
+        let redoButton = UIBarButtonItem(image: UIImage(systemName: "arrow.uturn.forward.circle"), style: .plain, target: self, action: #selector(redoTapped))
         
         navigationItem.leftBarButtonItems = [backButton, confirmButton] // Order: Back -> Confirm
         navigationItem.rightBarButtonItems = [redoButton, undoButton] // Order: Redo -> Undo
