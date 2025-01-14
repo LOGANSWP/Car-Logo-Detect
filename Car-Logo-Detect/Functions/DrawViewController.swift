@@ -29,14 +29,14 @@ class DrawViewController: UIViewController, PKCanvasViewDelegate, PKToolPickerOb
     }
     
     private func setupNavigationBar() {
-        // 设置标题
+        // Set title of the navigation bar
         title = "Drawing Board"
         
-        // 设置左侧返回按钮
+        // Set upleft back button
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem = backButton
         
-        // 设置右侧保存按钮
+        // Set upright save button
         let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
         navigationItem.rightBarButtonItem = saveButton
     }
@@ -50,12 +50,30 @@ class DrawViewController: UIViewController, PKCanvasViewDelegate, PKToolPickerOb
     }
     
     @objc private func backButtonTapped() {
-        // 返回上一级界面
         navigationController?.popViewController(animated: true)
     }
     
     @objc private func saveButtonTapped() {
-        // 处理保存图画逻辑
-        print("Save button tapped")
+        // Generate UIImage from PKCanvasView's drawing property
+        let drawing = canvasView.drawing
+        let image = drawing.image(from: canvasView.bounds, scale: UIScreen.main.scale)
+        
+        // Save UIImage to local photos
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+
+    // Save callback method
+    @objc private func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // Error
+            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true, completion: nil)
+        } else {
+            // Succeed
+            let alert = UIAlertController(title: "Saved", message: "Your drawing has been saved to Photos.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true, completion: nil)
+        }
     }
 }
