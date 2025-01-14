@@ -52,6 +52,9 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        cameraButton.delegate = self
+        photosButton.delegate = self
+        drawButton.delegate = self
         setupViews()
     }
 
@@ -91,5 +94,11 @@ class MainViewController: UIViewController {
             make.top.equalTo(photosButton).offset(100)
             make.width.equalTo(200)
         }
+    }
+}
+
+extension MainViewController: FuncButtonTapDelegate {
+    func tapFuncButton(type: FunctionType) {
+        navigationController?.pushViewController(type.gotoViewController.init(), animated: true)
     }
 }

@@ -10,8 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+protocol FuncButtonTapDelegate: AnyObject {
+    func tapFuncButton(type: FunctionType)
+}
+
 class FuncButton: UIButton {
     private let disposeBag = DisposeBag()
+    
+    weak var delegate: FuncButtonTapDelegate?
     
     init(funcType: FunctionType, frame: CGRect = .zero) {
         super.init(frame: frame)
@@ -20,8 +26,10 @@ class FuncButton: UIButton {
         self.backgroundColor = funcType.bgColor
         
         self.rx.tap
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] in
+                guard let self else { return }
                 print(funcType.tempPrintContent)
+                delegate?.tapFuncButton(type: funcType)
             })
             .disposed(by: disposeBag)
     }
