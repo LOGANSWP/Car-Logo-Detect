@@ -15,6 +15,13 @@ class DrawViewController: UIViewController, PKCanvasViewDelegate, PKToolPickerOb
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCanvas()
+        setupNavigationBar()
+        setupViews()
+        view.backgroundColor = .white
+    }
+    
+    private func setupCanvas() {
         canvasView.delegate = self
         canvasView.alwaysBounceVertical = true
         canvasView.drawingPolicy = .anyInput
@@ -22,10 +29,6 @@ class DrawViewController: UIViewController, PKCanvasViewDelegate, PKToolPickerOb
         toolPicker.setVisible(true, forFirstResponder: canvasView)
         toolPicker.addObserver(canvasView)
         canvasView.becomeFirstResponder()
-        
-        setupNavigationBar()
-        setupViews()
-        view.backgroundColor = .white
     }
     
     private func setupNavigationBar() {
@@ -34,16 +37,23 @@ class DrawViewController: UIViewController, PKCanvasViewDelegate, PKToolPickerOb
         
         // Set upleft back button
         let backButton = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(backButtonTapped))
-        navigationItem.leftBarButtonItem = backButton
         
         // Set upright save button
         let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
-        navigationItem.rightBarButtonItem = saveButton
+        
+        // Undo button
+        let undoButton = UIBarButtonItem(title: "Undo", style: .plain, target: self, action: #selector(undoTapped))
+        
+        // Redo button
+        let redoButton = UIBarButtonItem(title: "Redo", style: .plain, target: self, action: #selector(redoTapped))
+        
+        navigationItem.leftBarButtonItems = [backButton, saveButton] // Order: Back -> Save
+        navigationItem.rightBarButtonItems = [redoButton, undoButton] // Order: Redo -> Undo
     }
-    
+
     private func setupViews() {
         view.addSubview(canvasView)
-        
+
         canvasView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -75,5 +85,13 @@ class DrawViewController: UIViewController, PKCanvasViewDelegate, PKToolPickerOb
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             present(alert, animated: true, completion: nil)
         }
+    }
+    
+    @objc private func undoTapped() {
+        canvasView.undoManager?.undo()
+    }
+
+    @objc private func redoTapped() {
+        canvasView.undoManager?.redo()
     }
 }
