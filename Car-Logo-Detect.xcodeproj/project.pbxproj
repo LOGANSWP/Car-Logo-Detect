@@ -85,7 +85,8 @@
 		23CC40952D28FE7A00DB119B /* Car-Logo-Detect */ = {
 			isa = PBXGroup;
 			children = (
-				A75E64EF2D35247400E30C50 /* Functions */,
+				A75E64FA2D37B9D800E30C50 /* Wiki */,
+				A75E64EF2D35247400E30C50 /* Detect */,
 				23CC40962D28FE7A00DB119B /* AppDelegate.swift */,
 				23CC40982D28FE7A00DB119B /* SceneDelegate.swift */,
 				23CC409A2D28FE7A00DB119B /* MainViewController.swift */,
@@ -107,17 +108,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		A75E64EF2D35247400E30C50 /* Functions */ = {
+		A75E64EF2D35247400E30C50 /* Detect */ = {
 			isa = PBXGroup;
 			children = (
 				A75E64EB2D350DDE00E30C50 /* DrawViewController.swift */,
 				A75E64F02D36479C00E30C50 /* PreviewViewController.swift */,
+			);
+			path = Detect;
+			sourceTree = "<group>";
+		};
+		A75E64FA2D37B9D800E30C50 /* Wiki */ = {
+			isa = PBXGroup;
+			children = (
 				A75E64F22D3762B300E30C50 /* CarBrandCollectionViewController.swift */,
 				A75E64F42D37667900E30C50 /* CarBrandCell.swift */,
 				A75E64F62D37676400E30C50 /* CarBrandItem.swift */,
 				A75E64F82D378DB300E30C50 /* CarBrandDetailViewController.swift */,
 			);
-			path = Functions;
+			path = Wiki;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
