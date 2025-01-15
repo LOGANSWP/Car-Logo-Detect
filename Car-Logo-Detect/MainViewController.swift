@@ -29,13 +29,6 @@ class MainViewController: UIViewController {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         button.setTitleColor(.systemBlue, for: .normal)
         button.backgroundColor = .clear
-        
-        button.rx.tap
-            .subscribe(onNext: { [weak self] in
-                guard let self else { return }
-                present(aboutAlertController, animated: true, completion: nil)
-            })
-            .disposed(by: disposeBag)
         return button
     }()
     
@@ -50,6 +43,18 @@ class MainViewController: UIViewController {
     private lazy var photosButton = FuncButton(funcType: .photos)
     private lazy var drawButton = FuncButton(funcType: .draw)
     
+    private lazy var wikiButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "magnifyingglass.circle"), for: .normal)
+        button.tintColor = .systemBlue
+        button.backgroundColor = .clear
+        button.layer.cornerRadius = 32
+        button.imageView?.contentMode = .scaleAspectFill
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -63,6 +68,7 @@ class MainViewController: UIViewController {
         view.addSubview(aboutButton)
         view.addSubview(photosButton)
         view.addSubview(drawButton)
+        view.addSubview(wikiButton)
         
         mainTitle.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -85,9 +91,22 @@ class MainViewController: UIViewController {
             make.top.equalTo(photosButton).offset(100)
             make.width.equalTo(200)
         }
+        
+        wikiButton.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(drawButton.snp.bottom).offset(100)
+            make.width.height.equalTo(64)
+        }
     }
     
     private func setupBindings() {
+        aboutButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self else { return }
+                present(aboutAlertController, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+        
         photosButton.rx.tap
             .subscribe(onNext: {
                 let ps = ZLPhotoPreviewSheet()
@@ -103,6 +122,13 @@ class MainViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 navigationController?.pushViewController(DrawViewController(), animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        wikiButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self else { return }
+                navigationController?.pushViewController(CarInfoWikiViewController(), animated: true)
             })
             .disposed(by: disposeBag)
     }
