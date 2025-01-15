@@ -15,6 +15,13 @@ class CarBrandCollectionViewController: UIViewController {
     private let disposeBag = DisposeBag()
 
     private var carBrandlist: [CarBrandItem] = []
+    private var filteredBrandlist: [CarBrandItem] = []
+    
+    private lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.placeholder = "Search by brand name"
+        return searchBar
+    }()
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -35,8 +42,14 @@ class CarBrandCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configBrandlist()
+        filteredBrandlist = carBrandlist // Initially display all the brands
         setupViews()
         setupBindings()
+        
+        // Add tap gesture to hide the keyboard
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false // Allow tap event to continue passing
+        view.addGestureRecognizer(tapGesture)
     }
     
     private func configBrandlist() {
@@ -57,36 +70,66 @@ class CarBrandCollectionViewController: UIViewController {
         view.backgroundColor = .white
         title = "Car Brand Wiki"
         
+        view.addSubview(searchBar)
         view.addSubview(collectionView)
         
-        collectionView.snp.makeConstraints { make in
+        searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(50)
+        }
+        
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom)
             make.left.right.equalToSuperview().inset(30)
             make.bottom.equalToSuperview()
         }
     }
     
     private func setupBindings() {
+        // Observe the input of search bar
+        searchBar.rx.text.orEmpty
+            .distinctUntilChanged() // Avoid repeating
+            .subscribe(onNext: { [weak self] query in
+                guard let self else { return }
+                filteredBrandlist = self.carBrandlist.filter { brand in
+                    query.isEmpty || brand.brandName.lowercased().contains(query.lowercased())
+                }
+                collectionView.reloadData()
+            })
+            .disposed(by: disposeBag)
+        
+        searchBar.rx.searchButtonClicked
+            .subscribe(onNext: { [weak self] in
+                guard let self else { return }
+                searchBar.resignFirstResponder() // Hide the keyboard
+            })
+            .disposed(by: disposeBag)
+        
         collectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self else { return }
-                let item = carBrandlist[indexPath.item]
+                let item = filteredBrandlist[indexPath.item]
                 present(CarBrandDetailViewController(carBrandItem: item), animated: true)
             })
             .disposed(by: disposeBag)
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 
 extension CarBrandCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        carBrandlist.count
+        filteredBrandlist.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarBrandCell.identifier, for: indexPath) as? CarBrandCell else {
             fatalError("Unable to dequeue AlbumCollectionViewCell")
         }
-        cell.titleLabel.text = carBrandlist[indexPath.item].brandName
+        cell.titleLabel.text = filteredBrandlist[indexPath.item].brandName
         return cell
     }
 }
