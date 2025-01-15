@@ -19,7 +19,7 @@ class MainViewController: UIViewController {
         title.text = "Car Logo Detect"
         title.textAlignment = .center
         title.font = UIFont.boldSystemFont(ofSize: 48)
-        title.backgroundColor = .yellow
+        title.backgroundColor = .clear
         return title
     }()
     

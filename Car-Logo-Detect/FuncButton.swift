@@ -18,6 +18,7 @@ class FuncButton: UIButton {
         self.setTitle(funcType.titleName, for: .normal)
         self.titleLabel?.font = UIFont.systemFont(ofSize: 24)
         self.backgroundColor = funcType.bgColor
+        self.layer.cornerRadius = 12
     }
     
     required init?(coder: NSCoder) {

@@ -19,24 +19,26 @@ class PreviewViewController: UIViewController {
         title.text = "Detect"
         title.textAlignment = .center
         title.font = UIFont.boldSystemFont(ofSize: 56)
-        title.backgroundColor = .systemBlue
+        title.backgroundColor = .clear
         return title
     }()
     
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
-        view.backgroundColor = .yellow
+        view.backgroundColor = .clear
         return view
     }()
     
     private lazy var detectButton: UIButton = {
         let button = UIButton()
-        button.setTitle("GO", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 56)
-        button.setTitleColor(.systemBlue, for: .normal)
-        button.backgroundColor = .red
+        button.setImage(UIImage(systemName: "logo.xbox"), for: .normal)
+        button.tintColor = .systemBlue
+        button.backgroundColor = .clear
         button.layer.cornerRadius = 64
+        button.imageView?.contentMode = .scaleAspectFill
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
         
         button.rx.tap
             .subscribe(onNext: { [weak self] in
