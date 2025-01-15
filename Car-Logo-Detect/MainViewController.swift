@@ -128,7 +128,7 @@ class MainViewController: UIViewController {
         wikiButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
-                navigationController?.pushViewController(CarInfoWikiViewController(), animated: true)
+                navigationController?.pushViewController(CarBrandCollectionViewController(), animated: true)
             })
             .disposed(by: disposeBag)
     }

@@ -1,5 +1,5 @@
 //
-//  CarInfoWikiViewController.swift
+//  CarBrandCollectionViewController.swift
 //  Car-Logo-Detect
 //
 //  Created by swp on 2025/1/15.
@@ -8,8 +8,12 @@
 import Foundation
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
-class CarInfoWikiViewController: UIViewController {
+class CarBrandCollectionViewController: UIViewController {
+    private let disposeBag = DisposeBag()
+
     private var carBrandlist: [CarBrandItem] = []
     
     private lazy var collectionView: UICollectionView = {
@@ -32,6 +36,7 @@ class CarInfoWikiViewController: UIViewController {
         super.viewDidLoad()
         configBrandlist()
         setupViews()
+        setupBindings()
     }
     
     private func configBrandlist() {
@@ -43,22 +48,36 @@ class CarInfoWikiViewController: UIViewController {
         let brand6 = CarBrandItem(brandName: "Audi", originContry: "Germany")
         let brand7 = CarBrandItem(brandName: "Honda", originContry: "Japan")
         let brand8 = CarBrandItem(brandName: "Ferrari", originContry: "Italy")
-        carBrandlist.append(contentsOf: [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8])
+        let brand9 = CarBrandItem(brandName: "Maserati", originContry: "Italy")
+        let brand10 = CarBrandItem(brandName: "Bentley", originContry: "Uk")
+        carBrandlist.append(contentsOf: [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10])
     }
     
     private func setupViews() {
         view.backgroundColor = .white
+        title = "Car Brand Wiki"
+        
         view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(100)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.left.right.equalToSuperview().inset(30)
-            make.bottom.equalToSuperview().inset(100)
+            make.bottom.equalToSuperview()
         }
+    }
+    
+    private func setupBindings() {
+        collectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self else { return }
+                let item = carBrandlist[indexPath.item]
+                present(CarBrandDetailViewController(carBrandItem: item), animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
-extension CarInfoWikiViewController: UICollectionViewDataSource {
+extension CarBrandCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         carBrandlist.count
     }
