@@ -7,7 +7,6 @@
 
 import Foundation
 
-// Define model
 struct VehicleLogoItem: Codable {
     let brandName: String
     let logoImageInfo: LogoImageInfo
@@ -50,7 +49,7 @@ class LogoDataModel {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             
-            // The top-level structure of vehicle-logotypes.json is a dictionary rather than an array, So decode as [String: VehicleLogotypes]
+            // The top-level structure of vehicle-logotypes.json is a dictionary rather than an array, So decode as [String: VehicleLogoItem]
             let decodedData = try decoder.decode([String: VehicleLogoItem].self, from: data)
             // Extract values as an array
             logos = Array(decodedData.values)
