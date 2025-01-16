@@ -11,6 +11,7 @@ target 'Car-Logo-Detect' do
   pod 'RxSwift', '6.8.0'
   pod 'RxCocoa', '6.8.0'
   pod 'LookinServer', :configurations => ['Debug']
+  pod 'SDWebImage'
   # Pods for Car-Logo-Detect
 
 end

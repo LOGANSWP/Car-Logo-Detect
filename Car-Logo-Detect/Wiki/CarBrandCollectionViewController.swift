@@ -13,9 +13,9 @@ import RxCocoa
 
 class CarBrandCollectionViewController: UIViewController {
     private let disposeBag = DisposeBag()
-
-    private var carBrandlist: [CarBrandItem] = []
-    private var filteredBrandlist: [CarBrandItem] = []
+    
+    private var carBrandlist: [VehicleLogoItem] = LogoDataModel().logoData
+    private var filteredBrandlist: [VehicleLogoItem] = []
     
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -41,7 +41,6 @@ class CarBrandCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        configBrandlist()
         filteredBrandlist = carBrandlist // Initially display all the brands
         setupViews()
         setupBindings()
@@ -50,20 +49,6 @@ class CarBrandCollectionViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tapGesture.cancelsTouchesInView = false // Allow tap event to continue passing
         view.addGestureRecognizer(tapGesture)
-    }
-    
-    private func configBrandlist() {
-        let brand1 = CarBrandItem(brandName: "Benz", originContry: "Germany")
-        let brand2 = CarBrandItem(brandName: "Tesla", originContry: "USA")
-        let brand3 = CarBrandItem(brandName: "Toyata", originContry: "Japan")
-        let brand4 = CarBrandItem(brandName: "BYD", originContry: "China")
-        let brand5 = CarBrandItem(brandName: "Rolls-Royce", originContry: "UK")
-        let brand6 = CarBrandItem(brandName: "Audi", originContry: "Germany")
-        let brand7 = CarBrandItem(brandName: "Honda", originContry: "Japan")
-        let brand8 = CarBrandItem(brandName: "Ferrari", originContry: "Italy")
-        let brand9 = CarBrandItem(brandName: "Maserati", originContry: "Italy")
-        let brand10 = CarBrandItem(brandName: "Bentley", originContry: "Uk")
-        carBrandlist.append(contentsOf: [brand1, brand2, brand3, brand4, brand5, brand6, brand7, brand8, brand9, brand10])
     }
     
     private func setupViews() {
@@ -110,7 +95,7 @@ class CarBrandCollectionViewController: UIViewController {
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self else { return }
                 let item = filteredBrandlist[indexPath.item]
-                present(CarBrandDetailViewController(carBrandItem: item), animated: true)
+                present(CarBrandDetailViewController(vehicleLogoItem: item), animated: true)
             })
             .disposed(by: disposeBag)
     }

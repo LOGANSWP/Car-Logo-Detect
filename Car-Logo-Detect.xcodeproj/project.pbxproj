@@ -19,9 +19,10 @@
 		A75E64F12D36479C00E30C50 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64F02D36479C00E30C50 /* PreviewViewController.swift */; };
 		A75E64F32D3762B300E30C50 /* CarBrandCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64F22D3762B300E30C50 /* CarBrandCollectionViewController.swift */; };
 		A75E64F52D37667900E30C50 /* CarBrandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64F42D37667900E30C50 /* CarBrandCell.swift */; };
-		A75E64F72D37676400E30C50 /* CarBrandItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64F62D37676400E30C50 /* CarBrandItem.swift */; };
 		A75E64F92D378DB300E30C50 /* CarBrandDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64F82D378DB300E30C50 /* CarBrandDetailViewController.swift */; };
 		A75E64FE2D38B88900E30C50 /* FreeApiAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64FD2D38B88900E30C50 /* FreeApiAccess.swift */; };
+		A75E65012D38FE5B00E30C50 /* vehicle-logotypes.json in Resources */ = {isa = PBXBuildFile; fileRef = A75E65002D38FE5B00E30C50 /* vehicle-logotypes.json */; };
+		A75E65032D3901E400E30C50 /* LogoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E65022D3901E400E30C50 /* LogoDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,9 +41,10 @@
 		A75E64F02D36479C00E30C50 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		A75E64F22D3762B300E30C50 /* CarBrandCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarBrandCollectionViewController.swift; sourceTree = "<group>"; };
 		A75E64F42D37667900E30C50 /* CarBrandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarBrandCell.swift; sourceTree = "<group>"; };
-		A75E64F62D37676400E30C50 /* CarBrandItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarBrandItem.swift; sourceTree = "<group>"; };
 		A75E64F82D378DB300E30C50 /* CarBrandDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarBrandDetailViewController.swift; sourceTree = "<group>"; };
 		A75E64FD2D38B88900E30C50 /* FreeApiAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeApiAccess.swift; sourceTree = "<group>"; };
+		A75E65002D38FE5B00E30C50 /* vehicle-logotypes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "vehicle-logotypes.json"; sourceTree = "<group>"; };
+		A75E65022D3901E400E30C50 /* LogoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoDataModel.swift; sourceTree = "<group>"; };
 		F7EA77EBA0764EB6C76756DD /* Pods_Car_Logo_Detect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Car_Logo_Detect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 		23CC40952D28FE7A00DB119B /* Car-Logo-Detect */ = {
 			isa = PBXGroup;
 			children = (
+				A75E64FF2D38FE2F00E30C50 /* Resource */,
 				A75E64FA2D37B9D800E30C50 /* Wiki */,
 				A75E64EF2D35247400E30C50 /* Detect */,
 				23CC40962D28FE7A00DB119B /* AppDelegate.swift */,
@@ -125,10 +128,18 @@
 			children = (
 				A75E64F22D3762B300E30C50 /* CarBrandCollectionViewController.swift */,
 				A75E64F42D37667900E30C50 /* CarBrandCell.swift */,
-				A75E64F62D37676400E30C50 /* CarBrandItem.swift */,
 				A75E64F82D378DB300E30C50 /* CarBrandDetailViewController.swift */,
+				A75E65022D3901E400E30C50 /* LogoDataModel.swift */,
 			);
 			path = Wiki;
+			sourceTree = "<group>";
+		};
+		A75E64FF2D38FE2F00E30C50 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A75E65002D38FE5B00E30C50 /* vehicle-logotypes.json */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +204,7 @@
 			files = (
 				23CC40A02D28FE7A00DB119B /* Assets.xcassets in Resources */,
 				23CC40A32D28FE7A00DB119B /* Base in Resources */,
+				A75E65012D38FE5B00E30C50 /* vehicle-logotypes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,11 +259,11 @@
 			files = (
 				23CC409B2D28FE7A00DB119B /* MainViewController.swift in Sources */,
 				A75E64F92D378DB300E30C50 /* CarBrandDetailViewController.swift in Sources */,
+				A75E65032D3901E400E30C50 /* LogoDataModel.swift in Sources */,
 				A75E64E62D350BA500E30C50 /* FunctionType.swift in Sources */,
 				A75E64EE2D350EA900E30C50 /* FuncButton.swift in Sources */,
 				A75E64EC2D350DDE00E30C50 /* DrawViewController.swift in Sources */,
 				23CC40972D28FE7A00DB119B /* AppDelegate.swift in Sources */,
-				A75E64F72D37676400E30C50 /* CarBrandItem.swift in Sources */,
 				23CC40992D28FE7A00DB119B /* SceneDelegate.swift in Sources */,
 				A75E64FE2D38B88900E30C50 /* FreeApiAccess.swift in Sources */,
 				A75E64F52D37667900E30C50 /* CarBrandCell.swift in Sources */,

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import SDWebImage
 
 class CarBrandDetailViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
@@ -26,10 +27,17 @@ class CarBrandDetailViewController: UIViewController {
         return label
     }()
     
-    init(carBrandItem: CarBrandItem) {
+    private lazy var imageView: UIImageView = {
+        let view = UIImageView()
+        view.contentMode = .scaleAspectFit
+        view.backgroundColor = .clear
+        return view
+    }()
+    
+    init(vehicleLogoItem: VehicleLogoItem) {
         super.init(nibName: nil, bundle: nil)
-        titleLabel.text = carBrandItem.brandName
-        countryLabel.text = carBrandItem.originContry
+        titleLabel.text = vehicleLogoItem.brandName
+        imageView.sd_setImage(with: URL(string: vehicleLogoItem.logoImageInfo.imageURL), placeholderImage: nil, options: [.retryFailed])
     }
     
     required init?(coder: NSCoder) {
@@ -45,6 +53,7 @@ class CarBrandDetailViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(titleLabel)
         view.addSubview(countryLabel)
+        view.addSubview(imageView)
         
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -53,7 +62,14 @@ class CarBrandDetailViewController: UIViewController {
         
         countryLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(200)
+            make.top.equalTo(titleLabel.snp.bottom).offset(100)
+        }
+        
+        imageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(countryLabel.snp.bottom).offset(100)
+            make.width.equalToSuperview()
+            make.height.equalTo(300)
         }
     }
 }
