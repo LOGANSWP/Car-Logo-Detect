@@ -46,6 +46,8 @@ class PreviewViewController: UIViewController {
                 setupResultAlert(success: Bool.random())
                 guard let resultAlertController else { return }
                 present(resultAlertController, animated: true, completion: nil)
+                //FreeApiAccess.shared.realFetchAccessToken()
+                FreeApiAccess.shared.realRecognizeCar(image: imageView.image)
             })
             .disposed(by: disposeBag)
         return button
