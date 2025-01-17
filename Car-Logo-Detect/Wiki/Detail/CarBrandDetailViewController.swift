@@ -12,6 +12,7 @@ import SDWebImage
 
 class CarBrandDetailViewController: UIViewController {
     private var brandModellist: [ModelResult] = []
+    private var brandManufacturerlist: [ManufacturerResult] = []
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -36,7 +37,23 @@ class CarBrandDetailViewController: UIViewController {
         return view
     }()
     
-    private lazy var collectionView: UICollectionView = {
+    private lazy var manufacturerCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 5      // The space between each item
+        layout.itemSize = CGSize(width: 300, height: 30)  // The size of each item
+
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.showsVerticalScrollIndicator = true
+        collectionView.backgroundColor = .red
+        collectionView.dataSource = self
+        collectionView.register(CarManufacturerCell.self, forCellWithReuseIdentifier: CarManufacturerCell.identifier)
+        
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        return collectionView
+    }()
+    
+    private lazy var modelCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 5      // The space between each item
@@ -59,7 +76,12 @@ class CarBrandDetailViewController: UIViewController {
         
         ModelDataModel(brandName: vehicleLogoItem.brandName).onDataLoaded = { [weak self] models in
             self?.brandModellist = models
-            self?.collectionView.reloadData()
+            self?.modelCollectionView.reloadData()
+        }
+        
+        ManufacturerDataModel(brandName: vehicleLogoItem.brandName).onDataLoaded = { [weak self] manufacturers in
+            self?.brandManufacturerlist = manufacturers
+            self?.manufacturerCollectionView.reloadData()
         }
     }
     
@@ -79,10 +101,11 @@ class CarBrandDetailViewController: UIViewController {
         DispatchQueue.main.async { [weak self] in
             let titleLabelHeight = self?.titleLabel.frame.height ?? 0
             let imageViewHeight = self?.imageView.frame.height ?? 0
-            let collectionViewHeight = self?.collectionView.frame.height ?? 0
-            let extraHeight: CGFloat = 100 // Additional spacing
+            let modelCollectionViewHeight = self?.modelCollectionView.frame.height ?? 0
+            let manufacturerCollectionViewHeight = self?.manufacturerCollectionView.frame.height ?? 0
+            let extraHeight: CGFloat = 300 // Additional spacing
             
-            let contentHeight = titleLabelHeight + imageViewHeight + collectionViewHeight + extraHeight
+            let contentHeight = titleLabelHeight + imageViewHeight + modelCollectionViewHeight + manufacturerCollectionViewHeight + extraHeight
             
             self?.scrollView.contentSize = CGSize(width: self?.view.frame.width ?? 0, height: contentHeight)
         }
@@ -94,7 +117,8 @@ class CarBrandDetailViewController: UIViewController {
         
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(imageView)
-        scrollView.addSubview(collectionView)
+        scrollView.addSubview(manufacturerCollectionView)
+        scrollView.addSubview(modelCollectionView)
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
@@ -112,25 +136,46 @@ class CarBrandDetailViewController: UIViewController {
             make.height.equalTo(300)
         }
         
-        collectionView.snp.makeConstraints { make in
+        manufacturerCollectionView.snp.makeConstraints { make in
             make.top.equalTo(imageView.snp.bottom).offset(50)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().inset(30)
-            make.height.equalTo(600)
+            make.height.equalTo(300)
+        }
+        
+        modelCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(manufacturerCollectionView.snp.bottom).offset(50)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().inset(30)
+            make.height.equalTo(300)
         }
     }
 }
 
 extension CarBrandDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return brandModellist.count
+        if collectionView == manufacturerCollectionView {
+            return brandManufacturerlist.count
+        } else if collectionView == modelCollectionView {
+            return brandModellist.count
+        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarModelCell.identifier, for: indexPath) as? CarModelCell else {
-            fatalError("Unable to dequeue AlbumCollectionViewCell")
+        if collectionView == manufacturerCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarManufacturerCell.identifier, for: indexPath) as? CarManufacturerCell else {
+                fatalError("Unable to dequeue CarManufacturerCell")
+            }
+            cell.titleLabel.text = brandManufacturerlist[indexPath.item].Mfr_Name
+            return cell
+        } else if collectionView == modelCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarModelCell.identifier, for: indexPath) as? CarModelCell else {
+                fatalError("Unable to dequeue CarModelCell")
+            }
+            cell.titleLabel.text = brandModellist[indexPath.item].Model_Name
+            return cell
         }
-        cell.titleLabel.text = brandModellist[indexPath.item].Model_Name
-        return cell
+        fatalError("Unknown collection view")
     }
 }

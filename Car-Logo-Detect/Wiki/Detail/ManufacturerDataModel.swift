@@ -1,5 +1,5 @@
 //
-//  ModelDataModel.swift
+//  ManufacturerDataModel.swift
 //  Car-Logo-Detect
 //
 //  Created by swp on 2025/1/17.
@@ -7,26 +7,34 @@
 
 import Foundation
 
-struct ModelResult: Codable {
-    let Model_Name: String
+struct ManufacturerResult: Codable {
+    // Some properties maybe nil during the process of parsing JSON
+    let Address: String?
+    let City: String?
+    let StateProvince: String?
+    let Country: String?
+    let ContactEmail: String?
+    let ContactPhone: String?
+    let PostalCode: String?
+    let Mfr_Name: String?
 }
 
-struct ModelResponse: Codable {
-    let Results: [ModelResult]
+struct ManufacturerResponse: Codable {
+    let Results: [ManufacturerResult]
 }
 
-class ModelDataModel {
-    private var models: [ModelResult] = []
+class ManufacturerDataModel {
+    private var manufacturers: [ManufacturerResult] = []
     
     // Define callback closure
-    var onDataLoaded: (([ModelResult]) -> Void)?
+    var onDataLoaded: (([ManufacturerResult]) -> Void)?
     
     init(brandName: String) {
         loadJSONData(brandName: brandName)
     }
     
     private func loadJSONData(brandName: String) {
-        let urlString = "https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/\(brandName)?format=json"
+        let urlString = "https://vpic.nhtsa.dot.gov/api/vehicles/GetManufacturerDetails/\(brandName)?format=json"
 
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
@@ -46,13 +54,13 @@ class ModelDataModel {
             
             do {
                 let decoder = JSONDecoder()
-                let responseObject = try decoder.decode(ModelResponse.self, from: data)
+                let responseObject = try decoder.decode(ManufacturerResponse.self, from: data)
                 
-                self.models = responseObject.Results
+                self.manufacturers = responseObject.Results
                 
                 // Call callback to notify data loading completion
                 DispatchQueue.main.async {
-                    self.onDataLoaded?(self.models)
+                    self.onDataLoaded?(self.manufacturers)
                 }
             } catch {
                 print("Failed to parse JSON: \(error)")
@@ -60,3 +68,4 @@ class ModelDataModel {
         }.resume()
     }
 }
+
