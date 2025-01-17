@@ -23,6 +23,8 @@
 		A75E64FE2D38B88900E30C50 /* FreeApiAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64FD2D38B88900E30C50 /* FreeApiAccess.swift */; };
 		A75E65012D38FE5B00E30C50 /* vehicle-logotypes.json in Resources */ = {isa = PBXBuildFile; fileRef = A75E65002D38FE5B00E30C50 /* vehicle-logotypes.json */; };
 		A75E65032D3901E400E30C50 /* LogoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E65022D3901E400E30C50 /* LogoDataModel.swift */; };
+		A75E65062D3A2D1900E30C50 /* CarModelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E65052D3A2D1900E30C50 /* CarModelCell.swift */; };
+		A75E65092D3A2E1C00E30C50 /* ModelDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E65082D3A2E1C00E30C50 /* ModelDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		A75E64FD2D38B88900E30C50 /* FreeApiAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeApiAccess.swift; sourceTree = "<group>"; };
 		A75E65002D38FE5B00E30C50 /* vehicle-logotypes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "vehicle-logotypes.json"; sourceTree = "<group>"; };
 		A75E65022D3901E400E30C50 /* LogoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoDataModel.swift; sourceTree = "<group>"; };
+		A75E65052D3A2D1900E30C50 /* CarModelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarModelCell.swift; sourceTree = "<group>"; };
+		A75E65082D3A2E1C00E30C50 /* ModelDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDataModel.swift; sourceTree = "<group>"; };
 		F7EA77EBA0764EB6C76756DD /* Pods_Car_Logo_Detect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Car_Logo_Detect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -126,9 +130,9 @@
 		A75E64FA2D37B9D800E30C50 /* Wiki */ = {
 			isa = PBXGroup;
 			children = (
+				A75E65072D3A2E0000E30C50 /* Detail */,
 				A75E64F22D3762B300E30C50 /* CarBrandCollectionViewController.swift */,
 				A75E64F42D37667900E30C50 /* CarBrandCell.swift */,
-				A75E64F82D378DB300E30C50 /* CarBrandDetailViewController.swift */,
 				A75E65022D3901E400E30C50 /* LogoDataModel.swift */,
 			);
 			path = Wiki;
@@ -140,6 +144,16 @@
 				A75E65002D38FE5B00E30C50 /* vehicle-logotypes.json */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		A75E65072D3A2E0000E30C50 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				A75E64F82D378DB300E30C50 /* CarBrandDetailViewController.swift */,
+				A75E65052D3A2D1900E30C50 /* CarModelCell.swift */,
+				A75E65082D3A2E1C00E30C50 /* ModelDataModel.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,9 +280,11 @@
 				23CC40972D28FE7A00DB119B /* AppDelegate.swift in Sources */,
 				23CC40992D28FE7A00DB119B /* SceneDelegate.swift in Sources */,
 				A75E64FE2D38B88900E30C50 /* FreeApiAccess.swift in Sources */,
+				A75E65062D3A2D1900E30C50 /* CarModelCell.swift in Sources */,
 				A75E64F52D37667900E30C50 /* CarBrandCell.swift in Sources */,
 				A75E64F12D36479C00E30C50 /* PreviewViewController.swift in Sources */,
 				A75E64F32D3762B300E30C50 /* CarBrandCollectionViewController.swift in Sources */,
+				A75E65092D3A2E1C00E30C50 /* ModelDataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
