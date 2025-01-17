@@ -13,6 +13,14 @@ import SDWebImage
 class CarBrandDetailViewController: UIViewController {
     private var brandModellist: [ModelResult] = []
     
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.backgroundColor = .brown
+        scrollView.isScrollEnabled = true
+        scrollView.showsVerticalScrollIndicator = true
+        return scrollView
+    }()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -64,11 +72,33 @@ class CarBrandDetailViewController: UIViewController {
         setupViews()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        // Update the contentSize of the scrollView based on the total height of its subviews
+        // Ensure contentSize is updated after layout is done
+        DispatchQueue.main.async { [weak self] in
+            let titleLabelHeight = self?.titleLabel.frame.height ?? 0
+            let imageViewHeight = self?.imageView.frame.height ?? 0
+            let collectionViewHeight = self?.collectionView.frame.height ?? 0
+            let extraHeight: CGFloat = 100 // Additional spacing
+            
+            let contentHeight = titleLabelHeight + imageViewHeight + collectionViewHeight + extraHeight
+            
+            self?.scrollView.contentSize = CGSize(width: self?.view.frame.width ?? 0, height: contentHeight)
+        }
+    }
+    
     private func setupViews() {
         view.backgroundColor = .white
-        view.addSubview(titleLabel)
-        view.addSubview(imageView)
-        view.addSubview(collectionView)
+        view.addSubview(scrollView)
+        
+        scrollView.addSubview(titleLabel)
+        scrollView.addSubview(imageView)
+        scrollView.addSubview(collectionView)
+        
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -84,8 +114,9 @@ class CarBrandDetailViewController: UIViewController {
         
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(imageView.snp.bottom).offset(50)
-            make.left.right.equalToSuperview().inset(30)
-            make.bottom.equalToSuperview().inset(50)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().inset(30)
+            make.height.equalTo(600)
         }
     }
 }
