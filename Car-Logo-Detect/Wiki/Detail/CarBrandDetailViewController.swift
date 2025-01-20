@@ -9,10 +9,16 @@ import Foundation
 import UIKit
 import SnapKit
 import SDWebImage
+import RxSwift
+import RxCocoa
 
 class CarBrandDetailViewController: UIViewController {
+    private let disposeBag = DisposeBag()
+
     private var brandModellist: [ModelResult] = []
     private var brandManufacturerlist: [ManufacturerResult] = []
+    
+    private var manufacturerAlertController: UIAlertController?
     
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -92,6 +98,7 @@ class CarBrandDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        setupBindings()
     }
     
     override func viewDidLayoutSubviews() {
@@ -148,6 +155,54 @@ class CarBrandDetailViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().inset(30)
             make.height.equalTo(300)
+        }
+    }
+    
+    private func setupBindings() {
+        manufacturerCollectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self else { return }
+                let item = brandManufacturerlist[indexPath.item]
+                configManufacturerAlert(item: item)
+                guard let manufacturerAlertController else { return }
+                present(manufacturerAlertController, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    private func configManufacturerAlert(item: ManufacturerResult) {
+        manufacturerAlertController = UIAlertController(title: item.Mfr_Name,
+                                                message: nil, preferredStyle: .alert)
+        guard let manufacturerAlertController else { return }
+        let knownAction = UIAlertAction(title: "Known", style: .cancel, handler: nil)
+        manufacturerAlertController.addAction(knownAction)
+        manufacturerAlertController.addTextField { textField in
+            textField.isUserInteractionEnabled = false
+            textField.text = "Country: \(item.Country ?? "")"
+        }
+        manufacturerAlertController.addTextField { textField in
+            textField.isUserInteractionEnabled = false
+            textField.text = "Province: \(item.StateProvince ?? "")"
+        }
+        manufacturerAlertController.addTextField { textField in
+            textField.isUserInteractionEnabled = false
+            textField.text = "City: \(item.City ?? "")"
+        }
+        manufacturerAlertController.addTextField { textField in
+            textField.isUserInteractionEnabled = false
+            textField.text = "Address: \(item.Address ?? "")"
+        }
+        manufacturerAlertController.addTextField { textField in
+            textField.isUserInteractionEnabled = false
+            textField.text = "Postal code: \(item.PostalCode ?? "")"
+        }
+        manufacturerAlertController.addTextField { textField in
+            textField.isUserInteractionEnabled = false
+            textField.text = "Phone: \(item.ContactPhone ?? "")"
+        }
+        manufacturerAlertController.addTextField { textField in
+            textField.isUserInteractionEnabled = false
+            textField.text = "Email: \(item.ContactEmail ?? "")"
         }
     }
 }
