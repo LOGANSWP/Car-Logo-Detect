@@ -80,6 +80,8 @@ class CarBrandCollectionViewController: UIViewController {
                 filteredBrandlist = self.carBrandlist.filter { brand in
                     query.isEmpty || brand.brandName.lowercased().contains(query.lowercased())
                 }
+                // Sort alphabetically by brand name
+                self.filteredBrandlist.sort { $0.brandName.lowercased() < $1.brandName.lowercased() }
                 collectionView.reloadData()
             })
             .disposed(by: disposeBag)
