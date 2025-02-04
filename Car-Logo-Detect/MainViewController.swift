@@ -55,6 +55,18 @@ class MainViewController: UIViewController {
         return button
     }()
     
+    private lazy var priceButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "dollarsign.circle"), for: .normal)
+        button.tintColor = .systemYellow
+        button.backgroundColor = .clear
+        button.layer.cornerRadius = 32
+        button.imageView?.contentMode = .scaleAspectFill
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -69,6 +81,7 @@ class MainViewController: UIViewController {
         view.addSubview(photosButton)
         view.addSubview(drawButton)
         view.addSubview(wikiButton)
+        view.addSubview(priceButton)
         
         mainTitle.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -82,7 +95,7 @@ class MainViewController: UIViewController {
         
         photosButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(mainTitle).offset(300)
+            make.top.equalTo(mainTitle).offset(250)
             make.width.equalTo(200)
         }
         
@@ -93,8 +106,14 @@ class MainViewController: UIViewController {
         }
         
         wikiButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(drawButton.snp.bottom).offset(100)
+            make.leading.equalTo(drawButton)
+            make.top.equalTo(drawButton).offset(100)
+            make.width.height.equalTo(64)
+        }
+        
+        priceButton.snp.makeConstraints { make in
+            make.trailing.equalTo(drawButton)
+            make.top.equalTo(drawButton).offset(100)
             make.width.height.equalTo(64)
         }
     }
@@ -129,6 +148,13 @@ class MainViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
                 navigationController?.pushViewController(CarBrandCollectionViewController(), animated: true)
+            })
+            .disposed(by: disposeBag)
+        
+        priceButton.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self else { return }
+                navigationController?.pushViewController(CarPriceCollectionViewController(), animated: true)
             })
             .disposed(by: disposeBag)
     }
