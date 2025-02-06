@@ -48,6 +48,7 @@ class CarPriceCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        setupBindings()
     }
     
     private func setupViews() {
@@ -61,6 +62,16 @@ class CarPriceCollectionViewController: UIViewController {
             make.left.right.equalToSuperview().inset(30)
             make.bottom.equalToSuperview()
         }
+    }
+    
+    private func setupBindings() {
+        collectionView.rx.itemSelected
+            .subscribe(onNext: { [weak self] indexPath in
+                guard let self else { return }
+                let item = priceList[indexPath.item]
+                present(CarPriceDetailViewController(item: item), animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
