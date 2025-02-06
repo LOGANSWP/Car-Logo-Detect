@@ -1,5 +1,5 @@
 //
-//  manufacturerViewController.swift
+//  ManufacturerViewController.swift
 //  Car-Logo-Detect
 //
 //  Created by swp on 2025/1/21.
@@ -10,7 +10,7 @@ import UIKit
 import Eureka
 import SnapKit
 
-class manufacturerViewController: FormViewController {
+class ManufacturerViewController: FormViewController {
     private var resultItem: ManufacturerResult
     
     init(item: ManufacturerResult) {

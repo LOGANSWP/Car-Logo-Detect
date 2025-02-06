@@ -15,8 +15,8 @@ import RxCocoa
 class CarBrandDetailViewController: UIViewController {
     private let disposeBag = DisposeBag()
 
-    private var brandModellist: [ModelResult] = []
-    private var brandManufacturerlist: [ManufacturerResult] = []
+    private var brandModelList: [ModelResult] = []
+    private var brandManufacturerList: [ManufacturerResult] = []
         
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -79,12 +79,12 @@ class CarBrandDetailViewController: UIViewController {
         imageView.sd_setImage(with: URL(string: vehicleLogoItem.logoImageInfo.imageURL), placeholderImage: nil, options: [.retryFailed])
         
         ModelDataModel(brandName: vehicleLogoItem.brandName).onDataLoaded = { [weak self] models in
-            self?.brandModellist = models
+            self?.brandModelList = models
             self?.modelCollectionView.reloadData()
         }
         
         ManufacturerDataModel(brandName: vehicleLogoItem.brandName).onDataLoaded = { [weak self] manufacturers in
-            self?.brandManufacturerlist = manufacturers
+            self?.brandManufacturerList = manufacturers
             self?.manufacturerCollectionView.reloadData()
         }
     }
@@ -160,8 +160,8 @@ class CarBrandDetailViewController: UIViewController {
         manufacturerCollectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self else { return }
-                let item = brandManufacturerlist[indexPath.item]
-                present(manufacturerViewController(item: item), animated: true, completion: nil)
+                let item = brandManufacturerList[indexPath.item]
+                present(ManufacturerViewController(item: item), animated: true, completion: nil)
             })
             .disposed(by: disposeBag)
     }
@@ -170,9 +170,9 @@ class CarBrandDetailViewController: UIViewController {
 extension CarBrandDetailViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == manufacturerCollectionView {
-            return brandManufacturerlist.count
+            return brandManufacturerList.count
         } else if collectionView == modelCollectionView {
-            return brandModellist.count
+            return brandModelList.count
         }
         return 0
     }
@@ -182,13 +182,13 @@ extension CarBrandDetailViewController: UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarManufacturerCell.identifier, for: indexPath) as? CarManufacturerCell else {
                 fatalError("Unable to dequeue CarManufacturerCell")
             }
-            cell.titleLabel.text = brandManufacturerlist[indexPath.item].Mfr_Name
+            cell.titleLabel.text = brandManufacturerList[indexPath.item].Mfr_Name
             return cell
         } else if collectionView == modelCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarModelCell.identifier, for: indexPath) as? CarModelCell else {
                 fatalError("Unable to dequeue CarModelCell")
             }
-            cell.titleLabel.text = brandModellist[indexPath.item].Model_Name
+            cell.titleLabel.text = brandModelList[indexPath.item].Model_Name
             return cell
         }
         fatalError("Unknown collection view")

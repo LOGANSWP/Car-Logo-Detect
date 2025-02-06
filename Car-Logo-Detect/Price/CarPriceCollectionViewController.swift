@@ -12,6 +12,10 @@ import RxSwift
 import RxCocoa
 
 class CarPriceCollectionViewController: UIViewController {
+    private let disposeBag = DisposeBag()
+
+    private var priceList: [PriceResult] = []
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -27,6 +31,19 @@ class CarPriceCollectionViewController: UIViewController {
         collectionView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 30, right: 0)
         return collectionView
     }()
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        
+        PriceDataModel().onDataLoaded = { [weak self] models in
+            self?.priceList = models
+            self?.collectionView.reloadData()
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,13 +66,16 @@ class CarPriceCollectionViewController: UIViewController {
 
 extension CarPriceCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        priceList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarPriceCell.identifier, for: indexPath) as? CarPriceCell else {
             fatalError("Unable to dequeue AlbumCollectionViewCell")
         }
+        let item = priceList[indexPath.item]
+        cell.makeModelLabel.text = "\(item.make ?? ""): \(item.model ?? "")"
+        cell.priceLabel.text = "\(item.price ?? "")"
         return cell
     }
 }

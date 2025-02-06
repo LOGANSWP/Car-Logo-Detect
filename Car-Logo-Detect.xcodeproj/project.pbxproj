@@ -14,6 +14,7 @@
 		23CC409B2D28FE7A00DB119B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CC409A2D28FE7A00DB119B /* MainViewController.swift */; };
 		23CC40A02D28FE7A00DB119B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23CC409F2D28FE7A00DB119B /* Assets.xcassets */; };
 		23CC40A32D28FE7A00DB119B /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 23CC40A22D28FE7A00DB119B /* Base */; };
+		23CE08092D54E40B008C6F78 /* PriceDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CE08082D54E40B008C6F78 /* PriceDataModel.swift */; };
 		48D7104625027B6343891612 /* Pods_Car_Logo_Detect.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7EA77EBA0764EB6C76756DD /* Pods_Car_Logo_Detect.framework */; };
 		A75E64E62D350BA500E30C50 /* FunctionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64E52D350BA500E30C50 /* FunctionType.swift */; };
 		A75E64EC2D350DDE00E30C50 /* DrawViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E64EB2D350DDE00E30C50 /* DrawViewController.swift */; };
@@ -29,7 +30,7 @@
 		A75E65092D3A2E1C00E30C50 /* ModelDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E65082D3A2E1C00E30C50 /* ModelDataModel.swift */; };
 		A75E650B2D3A586900E30C50 /* CarManufacturerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E650A2D3A586900E30C50 /* CarManufacturerCell.swift */; };
 		A75E650D2D3A59E200E30C50 /* ManufacturerDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75E650C2D3A59E200E30C50 /* ManufacturerDataModel.swift */; };
-		A7F6A7102D3F3F7A00199863 /* manufacturerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F6A70F2D3F3F7A00199863 /* manufacturerViewController.swift */; };
+		A7F6A7102D3F3F7A00199863 /* ManufacturerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7F6A70F2D3F3F7A00199863 /* ManufacturerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		23CC409F2D28FE7A00DB119B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23CC40A22D28FE7A00DB119B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		23CC40A42D28FE7A00DB119B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23CE08082D54E40B008C6F78 /* PriceDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceDataModel.swift; sourceTree = "<group>"; };
 		54167AD410BE3C8FF21812CF /* Pods-Car-Logo-Detect.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Car-Logo-Detect.release.xcconfig"; path = "Target Support Files/Pods-Car-Logo-Detect/Pods-Car-Logo-Detect.release.xcconfig"; sourceTree = "<group>"; };
 		68A61A7F55FD7464AFBC494C /* Pods-Car-Logo-Detect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Car-Logo-Detect.debug.xcconfig"; path = "Target Support Files/Pods-Car-Logo-Detect/Pods-Car-Logo-Detect.debug.xcconfig"; sourceTree = "<group>"; };
 		A75E64E52D350BA500E30C50 /* FunctionType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FunctionType.swift; sourceTree = "<group>"; };
@@ -58,7 +60,7 @@
 		A75E65082D3A2E1C00E30C50 /* ModelDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDataModel.swift; sourceTree = "<group>"; };
 		A75E650A2D3A586900E30C50 /* CarManufacturerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarManufacturerCell.swift; sourceTree = "<group>"; };
 		A75E650C2D3A59E200E30C50 /* ManufacturerDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManufacturerDataModel.swift; sourceTree = "<group>"; };
-		A7F6A70F2D3F3F7A00199863 /* manufacturerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = manufacturerViewController.swift; sourceTree = "<group>"; };
+		A7F6A70F2D3F3F7A00199863 /* ManufacturerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManufacturerViewController.swift; sourceTree = "<group>"; };
 		F7EA77EBA0764EB6C76756DD /* Pods_Car_Logo_Detect.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Car_Logo_Detect.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -87,6 +89,7 @@
 			children = (
 				23487C502D524DFB0057A0F4 /* CarPriceCollectionViewController.swift */,
 				23487C522D52560D0057A0F4 /* CarPriceCell.swift */,
+				23CE08082D54E40B008C6F78 /* PriceDataModel.swift */,
 			);
 			path = Price;
 			sourceTree = "<group>";
@@ -170,7 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				A75E64F82D378DB300E30C50 /* CarBrandDetailViewController.swift */,
-				A7F6A70F2D3F3F7A00199863 /* manufacturerViewController.swift */,
+				A7F6A70F2D3F3F7A00199863 /* ManufacturerViewController.swift */,
 				A75E65052D3A2D1900E30C50 /* CarModelCell.swift */,
 				A75E650A2D3A586900E30C50 /* CarManufacturerCell.swift */,
 				A75E65082D3A2E1C00E30C50 /* ModelDataModel.swift */,
@@ -295,11 +298,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				23CC409B2D28FE7A00DB119B /* MainViewController.swift in Sources */,
+				23CE08092D54E40B008C6F78 /* PriceDataModel.swift in Sources */,
 				A75E64F92D378DB300E30C50 /* CarBrandDetailViewController.swift in Sources */,
 				A75E65032D3901E400E30C50 /* LogoDataModel.swift in Sources */,
 				A75E64E62D350BA500E30C50 /* FunctionType.swift in Sources */,
 				A75E64EE2D350EA900E30C50 /* FuncButton.swift in Sources */,
-				A7F6A7102D3F3F7A00199863 /* manufacturerViewController.swift in Sources */,
+				A7F6A7102D3F3F7A00199863 /* ManufacturerViewController.swift in Sources */,
 				A75E650B2D3A586900E30C50 /* CarManufacturerCell.swift in Sources */,
 				A75E64EC2D350DDE00E30C50 /* DrawViewController.swift in Sources */,
 				23CC40972D28FE7A00DB119B /* AppDelegate.swift in Sources */,
