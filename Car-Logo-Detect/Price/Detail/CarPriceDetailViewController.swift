@@ -30,20 +30,30 @@ class CarPriceDetailViewController: FormViewController {
         
         form +++ Section(){ [weak self] section in
             section.header = {
-                var header = HeaderFooterView<UILabel>(.callback({
-                    let title = UILabel()
-                    title.text = "\(self?.priceItem.make ?? ""): \(self?.priceItem.model ?? "")"
-                    title.textAlignment = .center
-                    title.font = UIFont.boldSystemFont(ofSize: 24)
-                    title.backgroundColor = .clear
-                    title.numberOfLines = 0 // Allow multi line display
-                    title.lineBreakMode = .byWordWrapping // Wrap by word
-                    return title
+                var header = HeaderFooterView<UIImageView>(.callback({
+                    let imageView = UIImageView()
+                    imageView.contentMode = .scaleAspectFit
+                    imageView.clipsToBounds = true
+                    
+                    guard let stringURL = self?.priceItem.primaryPhotoUrl,
+                          let imageURL = URL(string: stringURL) else {
+                        print("Invalid image URL")
+                        return imageView
+                    }
+
+                    imageView.sd_setImage(with: imageURL, placeholderImage: UIImage(named: "placeholder"), options: [.retryFailed, .refreshCached]) { (image, error, _, _) in
+                        if let error = error {
+                            print("Image loading error: \(error.localizedDescription)")
+                        }
+                    }
+                    
+                    return imageView
                 }))
-                header.height = { 150 }
+                header.height = { 300 }
                 return header
             }()
         }
+
         <<< LabelRow(){ row in
             row.title = "Make"
             row.value = priceItem.make
