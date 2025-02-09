@@ -42,14 +42,13 @@ class PreviewViewController: UIViewController {
         
         button.rx.tap
             .subscribe(onNext: { [weak self] in
-                guard let self else { return }
-                setupResultAlert(success: Bool.random())
-                guard let resultAlertController else { return }
-                present(resultAlertController, animated: true, completion: nil)
-                
+                guard let self, let image = imageView.image else { return }
                 // Test For car logo detect api
-                //FreeApiAccess.shared.realFetchAccessToken()
-                FreeApiAccess.shared.realRecognizeCar(image: imageView.image)
+                FreeApiAccess.shared.recognizeLogo(image: image) { [weak self] confidence, brand in
+                    DispatchQueue.main.async {
+                        self?.setupResultAlert(confidence: confidence, brand: brand)
+                    }
+                }
             })
             .disposed(by: disposeBag)
         return button
@@ -95,18 +94,22 @@ class PreviewViewController: UIViewController {
         }
     }
     
-    private func setupResultAlert(success: Bool) {
-        if success {
+    private func setupResultAlert(confidence: Double, brand: String) {
+        if confidence >= 0.3 {
             resultAlertController = UIAlertController(title: "Success",
-                                                      message: "BMW", preferredStyle: .alert)
+                                                      message: brand, preferredStyle: .alert)
         } else {
             resultAlertController = UIAlertController(title: "Error",
                                                       message: "Please retry", preferredStyle: .alert)
         }
+        guard let resultAlertController else { return }
+        
         let returnToHomeAction = UIAlertAction(title: "Return", style: .default, handler: { [weak self] _ in
             guard let self else { return }
             dismiss(animated: true)
         })
-        resultAlertController?.addAction(returnToHomeAction)
+        resultAlertController.addAction(returnToHomeAction)
+        
+        present(resultAlertController, animated: true, completion: nil)
     }
 }

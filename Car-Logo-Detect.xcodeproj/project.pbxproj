@@ -10,6 +10,7 @@
 		23487C512D524DFB0057A0F4 /* CarPriceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23487C502D524DFB0057A0F4 /* CarPriceCollectionViewController.swift */; };
 		23487C532D52560D0057A0F4 /* CarPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23487C522D52560D0057A0F4 /* CarPriceCell.swift */; };
 		235A54812D54F1370030F878 /* CarPriceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235A54802D54F1370030F878 /* CarPriceDetailViewController.swift */; };
+		235FF0E42D58E84F00B64A4F /* CarInference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235FF0E32D58E84F00B64A4F /* CarInference.swift */; };
 		23CC40972D28FE7A00DB119B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CC40962D28FE7A00DB119B /* AppDelegate.swift */; };
 		23CC40992D28FE7A00DB119B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CC40982D28FE7A00DB119B /* SceneDelegate.swift */; };
 		23CC409B2D28FE7A00DB119B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CC409A2D28FE7A00DB119B /* MainViewController.swift */; };
@@ -38,6 +39,7 @@
 		23487C502D524DFB0057A0F4 /* CarPriceCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPriceCollectionViewController.swift; sourceTree = "<group>"; };
 		23487C522D52560D0057A0F4 /* CarPriceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPriceCell.swift; sourceTree = "<group>"; };
 		235A54802D54F1370030F878 /* CarPriceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPriceDetailViewController.swift; sourceTree = "<group>"; };
+		235FF0E32D58E84F00B64A4F /* CarInference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInference.swift; sourceTree = "<group>"; };
 		23CC40932D28FE7A00DB119B /* Car-Logo-Detect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Car-Logo-Detect.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23CC40962D28FE7A00DB119B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23CC40982D28FE7A00DB119B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				A75E64EB2D350DDE00E30C50 /* DrawViewController.swift */,
 				A75E64F02D36479C00E30C50 /* PreviewViewController.swift */,
 				A75E64FD2D38B88900E30C50 /* FreeApiAccess.swift */,
+				235FF0E32D58E84F00B64A4F /* CarInference.swift */,
 			);
 			path = Detect;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				A75E64EE2D350EA900E30C50 /* FuncButton.swift in Sources */,
 				A7F6A7102D3F3F7A00199863 /* ManufacturerViewController.swift in Sources */,
 				A75E650B2D3A586900E30C50 /* CarManufacturerCell.swift in Sources */,
+				235FF0E42D58E84F00B64A4F /* CarInference.swift in Sources */,
 				A75E64EC2D350DDE00E30C50 /* DrawViewController.swift in Sources */,
 				23CC40972D28FE7A00DB119B /* AppDelegate.swift in Sources */,
 				23487C532D52560D0057A0F4 /* CarPriceCell.swift in Sources */,

@@ -10,110 +10,44 @@ import UIKit
 
 class FreeApiAccess {
     static let shared = FreeApiAccess()
-    
+        
     private init() {}
     
-    func realFetchAccessToken() {
-        let clientID = "H58wSE1EQjgu5w5BbU9ZpgbE" // 替换为您的 AK
-        let clientSecret = "1zxriRG10H9sSPVNt5Pb5Ex1ogQyHlwe" // 替换为您的 SK
-        fetchAccessToken(clientID: clientID, clientSecret: clientSecret)
-    }
-    
-    func realRecognizeCar(image: UIImage?) {
-        guard let image else { return }
-        let accessToken = "24.a824ea8965a8f9a1bc872824cdf5014b.2592000.1739603717.282335-25406556" // 替换为通过鉴权接口获取的 access token
-        recognizeCar(image: image, accessToken: accessToken)
-    }
-    
-    private func fetchAccessToken(clientID: String, clientSecret: String) {
-        let host = "https://aip.baidubce.com/oauth/2.0/token"
-        let queryItems = [
-            URLQueryItem(name: "grant_type", value: "client_credentials"),
-            URLQueryItem(name: "client_id", value: clientID),
-            URLQueryItem(name: "client_secret", value: clientSecret)
-        ]
-        
-        var urlComponents = URLComponents(string: host)
-        urlComponents?.queryItems = queryItems
-        
-        guard let url = urlComponents?.url else {
-            print("Invalid URL")
-            return
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        request.setValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
-        
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-                return
-            }
-            
-            guard let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                print("Failed to fetch token")
-                return
-            }
-            
-            if let content = String(data: data, encoding: .utf8) {
-                print("Response: \(content)")
-            }
-        }
-        
-        task.resume()
-    }
+    // https://universe.roboflow.com/g3-32st4/categorize-car-brands
+    func recognizeLogo(image: UIImage, completion: @escaping (Double, String) -> Void) {
+        // Load Image and Convert to Base64
+        let imageData = image.jpegData(compressionQuality: 1)
+        let fileContent = imageData?.base64EncodedString()
+        let postData = fileContent!.data(using: .utf8)
 
-    private func recognizeCar(image: UIImage, accessToken: String, topNum: Int = 5) {
-        let requestURL = "https://aip.baidubce.com/rest/2.0/image-classify/v1/car?access_token=\(accessToken)"
-        
-        // 将 UIImage 转换为 Base64 编码
-        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
-            print("Failed to convert UIImage to JPEG data")
-            return
-        }
-        let base64Image = imageData.base64EncodedString()
-        
-        // 构造请求参数
-        let parameters: [String: Any] = [
-            "image": base64Image,
-            "top_num": topNum
-        ]
-        
-        guard let postData = try? JSONSerialization.data(withJSONObject: parameters) else {
-            print("Failed to encode parameters")
-            return
-        }
-        
-        // 创建请求
-        guard let url = URL(string: requestURL) else {
-            print("Invalid URL")
-            return
-        }
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
+        // Initialize Inference Server Request with 26tetxE8B5WES41hy1E9, Model, and Model Version
+        var request = URLRequest(url: URL(string: "https://classify.roboflow.com/categorize-car-brands/1?api_key=26tetxE8B5WES41hy1E9&name=YOUR_IMAGE.jpg")!,timeoutInterval: Double.infinity)
         request.addValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "POST"
         request.httpBody = postData
-        
-        // 发送请求
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
+
+        // Execute Post Request
+        URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
+            // Parse Response to String
+            guard let data = data else {
+                print("Error: \(String(describing: error))")
+                completion(0, "")
                 return
             }
-            
-            guard let data = data, let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                print("Request failed")
-                return
+
+            // Convert Response String to Dictionary
+            do {
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(CarInference.self, from: data)
+                DispatchQueue.main.async {
+                    // Handle decoded data
+                    print("Top Prediction: \(result.top) (\(result.confidence))")
+                    completion(result.confidence, result.top)
+                }
+            } catch {
+                print(error.localizedDescription)
+                completion(0, "")
             }
-            
-            // 打印响应结果
-            if let content = String(data: data, encoding: .utf8) {
-                print("Response: \(content)")
-            }
-        }
-        task.resume()
+        }).resume()
     }
 }

@@ -7,12 +7,12 @@
 		<key>Eureka.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>9</integer>
 		</dict>
 		<key>LookinServer.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>14</integer>
 		</dict>
 		<key>Pods-Car-Logo-Detect.xcscheme</key>
 		<dict>
@@ -24,22 +24,22 @@
 		<key>RxCocoa-RxCocoa_Privacy.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>8</integer>
 		</dict>
 		<key>RxCocoa.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>14</integer>
+			<integer>15</integer>
 		</dict>
 		<key>RxRelay-RxRelay_Privacy.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>12</integer>
 		</dict>
 		<key>RxRelay.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>12</integer>
+			<integer>10</integer>
 		</dict>
 		<key>RxSwift-RxSwift_Privacy.xcscheme_^#shared#^_</key>
 		<dict>
@@ -49,17 +49,17 @@
 		<key>RxSwift.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>13</integer>
+			<integer>7</integer>
 		</dict>
 		<key>SDWebImage-SDWebImage.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>17</integer>
 		</dict>
 		<key>SDWebImage.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>13</integer>
 		</dict>
 		<key>Sketch-Sketch.xcscheme</key>
 		<dict>
