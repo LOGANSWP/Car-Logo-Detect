@@ -3,6 +3,7 @@ PODS:
   - LookinServer (1.2.8):
     - LookinServer/Core (= 1.2.8)
   - LookinServer/Core (1.2.8)
+  - Parchment (4.1.0)
   - RxCocoa (6.8.0):
     - RxRelay (= 6.8.0)
     - RxSwift (= 6.8.0)
@@ -21,6 +22,7 @@ PODS:
 DEPENDENCIES:
   - Eureka
   - LookinServer
+  - Parchment (~> 4.0)
   - RxCocoa (= 6.8.0)
   - RxSwift (= 6.8.0)
   - SDWebImage
@@ -32,6 +34,7 @@ SPEC REPOS:
   trunk:
     - Eureka
     - LookinServer
+    - Parchment
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -43,6 +46,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Eureka: 1c18c7fcd8f772cc2ca42d6be36292dffa77eecb
   LookinServer: 1b2b61c6402ae29fa22182d48f5cd067b4e99e80
+  Parchment: fdea264f5de6d73b0b69a31c686fab762c78ed2f
   RxCocoa: 2d33c1e1e5d66492052ad46b11024ae287572880
   RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705
   RxSwift: 4e28be97cbcfeee614af26d83415febbf2bf6f45
@@ -51,6 +55,6 @@ SPEC CHECKSUMS:
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   ZLPhotoBrowser: 04c8a5c5299a3b5945c60bd0e676c16d1215b14c
 
-PODFILE CHECKSUM: b3533117bce0424aebd00969158d986e110b2d40
+PODFILE CHECKSUM: 9bf87713ad829e6926037fa169804c7aa09f4684
 
 COCOAPODS: 1.16.2

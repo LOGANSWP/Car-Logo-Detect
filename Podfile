@@ -13,6 +13,7 @@ target 'Car-Logo-Detect' do
   pod 'LookinServer', :configurations => ['Debug']
   pod 'SDWebImage'
   pod 'Eureka'
+  pod 'Parchment', '~> 4.0'
   # Pods for Car-Logo-Detect
 
 end
