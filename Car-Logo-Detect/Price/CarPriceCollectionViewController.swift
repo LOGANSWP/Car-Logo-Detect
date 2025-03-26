@@ -32,10 +32,10 @@ class CarPriceCollectionViewController: UIViewController {
         return collectionView
     }()
     
-    init() {
+    init(pageNumber: Int) {
         super.init(nibName: nil, bundle: nil)
         
-        PriceDataModel().onDataLoaded = { [weak self] models in
+        PriceDataModel(pageNumber: pageNumber).onDataLoaded = { [weak self] models in
             self?.priceList = models
             self?.collectionView.reloadData()
         }

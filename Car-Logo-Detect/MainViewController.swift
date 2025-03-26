@@ -154,7 +154,7 @@ class MainViewController: UIViewController {
         priceButton.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self else { return }
-                navigationController?.pushViewController(CarPriceCollectionViewController(), animated: true)
+                navigationController?.pushViewController(CarPricePagingViewController(), animated: true)
             })
             .disposed(by: disposeBag)
     }

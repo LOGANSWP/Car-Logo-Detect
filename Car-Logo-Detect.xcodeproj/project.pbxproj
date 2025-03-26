@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230805232D93EF790007D2C0 /* CarPricePagingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230805222D93EF790007D2C0 /* CarPricePagingItem.swift */; };
+		230805252D93F2B70007D2C0 /* CarPricePagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230805242D93F2B70007D2C0 /* CarPricePagingViewController.swift */; };
+		230805272D93FC5E0007D2C0 /* CarPricePagingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230805262D93FC5E0007D2C0 /* CarPricePagingCell.swift */; };
 		23487C512D524DFB0057A0F4 /* CarPriceCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23487C502D524DFB0057A0F4 /* CarPriceCollectionViewController.swift */; };
 		23487C532D52560D0057A0F4 /* CarPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23487C522D52560D0057A0F4 /* CarPriceCell.swift */; };
 		235A54812D54F1370030F878 /* CarPriceDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235A54802D54F1370030F878 /* CarPriceDetailViewController.swift */; };
@@ -36,6 +39,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		230805222D93EF790007D2C0 /* CarPricePagingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPricePagingItem.swift; sourceTree = "<group>"; };
+		230805242D93F2B70007D2C0 /* CarPricePagingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPricePagingViewController.swift; sourceTree = "<group>"; };
+		230805262D93FC5E0007D2C0 /* CarPricePagingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPricePagingCell.swift; sourceTree = "<group>"; };
 		23487C502D524DFB0057A0F4 /* CarPriceCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPriceCollectionViewController.swift; sourceTree = "<group>"; };
 		23487C522D52560D0057A0F4 /* CarPriceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPriceCell.swift; sourceTree = "<group>"; };
 		235A54802D54F1370030F878 /* CarPriceDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPriceDetailViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +101,9 @@
 				23487C502D524DFB0057A0F4 /* CarPriceCollectionViewController.swift */,
 				23487C522D52560D0057A0F4 /* CarPriceCell.swift */,
 				23CE08082D54E40B008C6F78 /* PriceDataModel.swift */,
+				230805242D93F2B70007D2C0 /* CarPricePagingViewController.swift */,
+				230805222D93EF790007D2C0 /* CarPricePagingItem.swift */,
+				230805262D93FC5E0007D2C0 /* CarPricePagingCell.swift */,
 			);
 			path = Price;
 			sourceTree = "<group>";
@@ -312,11 +321,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				23CC409B2D28FE7A00DB119B /* MainViewController.swift in Sources */,
+				230805232D93EF790007D2C0 /* CarPricePagingItem.swift in Sources */,
 				23CE08092D54E40B008C6F78 /* PriceDataModel.swift in Sources */,
+				230805272D93FC5E0007D2C0 /* CarPricePagingCell.swift in Sources */,
 				A75E64F92D378DB300E30C50 /* CarBrandDetailViewController.swift in Sources */,
 				A75E65032D3901E400E30C50 /* LogoDataModel.swift in Sources */,
 				A75E64E62D350BA500E30C50 /* FunctionType.swift in Sources */,
 				A75E64EE2D350EA900E30C50 /* FuncButton.swift in Sources */,
+				230805252D93F2B70007D2C0 /* CarPricePagingViewController.swift in Sources */,
 				A7F6A7102D3F3F7A00199863 /* ManufacturerViewController.swift in Sources */,
 				A75E650B2D3A586900E30C50 /* CarManufacturerCell.swift in Sources */,
 				235FF0E42D58E84F00B64A4F /* CarInference.swift in Sources */,

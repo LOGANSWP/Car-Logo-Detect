@@ -38,17 +38,17 @@ struct PriceResponse: Codable {
 
 class PriceDataModel {
     private var prices: [PriceResult] = []
-    
+        
     // Define callback closure
     var onDataLoaded: (([PriceResult]) -> Void)?
     
-    init() {
-        loadJSONData()
+    init(pageNumber: Int) {
+        loadJSONData(pageNumber: pageNumber)
     }
     
-    private func loadJSONData() {
-        // Only 20 datas received
-        let urlString = "https://auto.dev/api/listings?apikey=ZrQEPSkKc3V3ZWlwZW5nMTAyNUBnbWFpbC5jb20="
+    private func loadJSONData(pageNumber: Int) {
+        // Pagination
+        let urlString = "https://auto.dev/api/listings?apikey=ZrQEPSkKc3V3ZWlwZW5nMTAyNUBnbWFpbC5jb20=&page=\(pageNumber)"
 
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
