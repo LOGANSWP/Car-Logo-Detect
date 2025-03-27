@@ -3,6 +3,7 @@ PODS:
   - LookinServer (1.2.8):
     - LookinServer/Core (= 1.2.8)
   - LookinServer/Core (1.2.8)
+  - MessengerKit (1.0.5)
   - Parchment (4.1.0)
   - RxCocoa (6.8.0):
     - RxRelay (= 6.8.0)
@@ -22,6 +23,7 @@ PODS:
 DEPENDENCIES:
   - Eureka
   - LookinServer
+  - MessengerKit (from `https://github.com/steve228uk/MessengerKit.git`)
   - Parchment (~> 4.0)
   - RxCocoa (= 6.8.0)
   - RxSwift (= 6.8.0)
@@ -43,9 +45,19 @@ SPEC REPOS:
     - SnapKit
     - ZLPhotoBrowser
 
+EXTERNAL SOURCES:
+  MessengerKit:
+    :git: https://github.com/steve228uk/MessengerKit.git
+
+CHECKOUT OPTIONS:
+  MessengerKit:
+    :commit: a97544ca047628cebede82ab0a32a69c7acfa9fe
+    :git: https://github.com/steve228uk/MessengerKit.git
+
 SPEC CHECKSUMS:
   Eureka: 1c18c7fcd8f772cc2ca42d6be36292dffa77eecb
   LookinServer: 1b2b61c6402ae29fa22182d48f5cd067b4e99e80
+  MessengerKit: 26dbfa81b76b22b7891028fb9a2cefdf4e86236f
   Parchment: fdea264f5de6d73b0b69a31c686fab762c78ed2f
   RxCocoa: 2d33c1e1e5d66492052ad46b11024ae287572880
   RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705
@@ -55,6 +67,6 @@ SPEC CHECKSUMS:
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   ZLPhotoBrowser: 04c8a5c5299a3b5945c60bd0e676c16d1215b14c
 
-PODFILE CHECKSUM: 9bf87713ad829e6926037fa169804c7aa09f4684
+PODFILE CHECKSUM: 1d98117af261f3f2776b6f2f4ba5de513f250fdb
 
 COCOAPODS: 1.16.2
