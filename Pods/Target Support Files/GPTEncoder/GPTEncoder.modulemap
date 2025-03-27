@@ -1,0 +1,6 @@
+framework module GPTEncoder {
+  umbrella header "GPTEncoder-umbrella.h"
+
+  export *
+  module * { export * }
+}

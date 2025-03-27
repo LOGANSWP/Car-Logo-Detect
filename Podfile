@@ -15,6 +15,7 @@ target 'Car-Logo-Detect' do
   pod 'Eureka'
   pod 'Parchment', '~> 4.0'
   pod 'MessengerKit', :git => 'https://github.com/steve228uk/MessengerKit.git'
+  pod 'ChatGPTSwift', '~> 1.3.1'
   # Pods for Car-Logo-Detect
 
 end

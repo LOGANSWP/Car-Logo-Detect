@@ -1,5 +1,8 @@
 PODS:
+  - ChatGPTSwift (1.3.1):
+    - GPTEncoder (= 1.0.0)
   - Eureka (5.5.0)
+  - GPTEncoder (1.0.0)
   - LookinServer (1.2.8):
     - LookinServer/Core (= 1.2.8)
   - LookinServer/Core (1.2.8)
@@ -21,6 +24,7 @@ PODS:
   - ZLPhotoBrowser/Core (4.5.7)
 
 DEPENDENCIES:
+  - ChatGPTSwift (~> 1.3.1)
   - Eureka
   - LookinServer
   - MessengerKit (from `https://github.com/steve228uk/MessengerKit.git`)
@@ -34,7 +38,9 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - ChatGPTSwift
     - Eureka
+    - GPTEncoder
     - LookinServer
     - Parchment
     - RxCocoa
@@ -55,7 +61,9 @@ CHECKOUT OPTIONS:
     :git: https://github.com/steve228uk/MessengerKit.git
 
 SPEC CHECKSUMS:
+  ChatGPTSwift: 37a1d90b9b8af621618b0abd92cf8ac39eccee59
   Eureka: 1c18c7fcd8f772cc2ca42d6be36292dffa77eecb
+  GPTEncoder: 67d0f61b0ef846cea92d7a9e4d4063beb8cd7227
   LookinServer: 1b2b61c6402ae29fa22182d48f5cd067b4e99e80
   MessengerKit: 26dbfa81b76b22b7891028fb9a2cefdf4e86236f
   Parchment: fdea264f5de6d73b0b69a31c686fab762c78ed2f
@@ -67,6 +75,6 @@ SPEC CHECKSUMS:
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   ZLPhotoBrowser: 04c8a5c5299a3b5945c60bd0e676c16d1215b14c
 
-PODFILE CHECKSUM: 1d98117af261f3f2776b6f2f4ba5de513f250fdb
+PODFILE CHECKSUM: 07803510a72e446f169ecb1da8a1e92a5753f84b
 
 COCOAPODS: 1.16.2

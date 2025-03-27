@@ -1,0 +1,6 @@
+framework module ChatGPTSwift {
+  umbrella header "ChatGPTSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
