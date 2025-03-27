@@ -8,12 +8,15 @@
 import Foundation
 import UIKit
 import MessengerKit
+import ChatGPTSwift
 
 class AIAssistantViewController: MSGMessengerViewController {
     // Users in the chat
     let steve = User(displayName: "Steve", avatar: nil, avatarUrl: nil, isSender: true)
     
     let tim = User(displayName: "Tim", avatar: nil, avatarUrl: nil, isSender: false)
+    
+    let api = ChatGPTAPI(apiKey: APIKeys.chatGPTAPIKey)
     
     // Messages
     lazy var messages: [[MSGMessage]] = {
@@ -45,6 +48,21 @@ class AIAssistantViewController: MSGMessengerViewController {
 
         // Insert the new message into the conversation
         insert(steveMessage)
+        
+        Task {
+            do {
+                let response = try await api.sendMessage(text: messageText)
+                let timMessage = MSGMessage(id: messages.flatMap { $0 }.count + 1, body: .text(response), user: tim, sentAt: Date())
+                insert(timMessage)
+                
+                print(response)
+            } catch {
+                let errorMessage = MSGMessage(id: messages.flatMap { $0 }.count + 1, body: .text(error.localizedDescription), user: tim, sentAt: Date())
+                insert(errorMessage)
+                
+                print(error.localizedDescription)
+            }
+        }
     }
     
     override func insert(_ message: MSGMessage) {
