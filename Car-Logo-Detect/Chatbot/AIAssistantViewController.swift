@@ -14,19 +14,17 @@ class AIAssistantViewController: MSGMessengerViewController {
     // Users in the chat
     let steve = User(displayName: "Steve", avatar: nil, avatarUrl: nil, isSender: true)
     
-    let tim = User(displayName: "Tim", avatar: nil, avatarUrl: nil, isSender: false)
+    let chatgpt = User(displayName: "ChatGPT", avatar: nil, avatarUrl: nil, isSender: false)
     
-    let api = ChatGPTAPI(apiKey: APIKeys.chatGPTAPIKey)
+    // MARK: - Use xiaoai transfer site to access chatgpt service(https://a.xiaoai.plus/)
+    //let api = ChatGPTAPI(apiKey: APIKeys.chatGPTAPIKey)
+    let api = ChatGPTAPI(apiKey: APIKeys.xiaoaiAPIKey)
     
     // Messages
     lazy var messages: [[MSGMessage]] = {
         return [
             [
-                MSGMessage(id: 1, body: .emoji("🐙💦🔫"), user: tim, sentAt: Date()),
-            ],
-            [
-                MSGMessage(id: 2, body: .text("Yeah sure, gimme 5"), user: steve, sentAt: Date()),
-                MSGMessage(id: 3, body: .text("Okay ready when you are"), user: steve, sentAt: Date())
+                MSGMessage(id: 1, body: .text("Hi, I am your personal car consultant. May I ask if you need any help? 😉"), user: chatgpt, sentAt: Date()),
             ]
         ]
     }()
@@ -52,12 +50,12 @@ class AIAssistantViewController: MSGMessengerViewController {
         Task {
             do {
                 let response = try await api.sendMessage(text: messageText)
-                let timMessage = MSGMessage(id: messages.flatMap { $0 }.count + 1, body: .text(response), user: tim, sentAt: Date())
+                let timMessage = MSGMessage(id: messages.flatMap { $0 }.count + 1, body: .text(response), user: chatgpt, sentAt: Date())
                 insert(timMessage)
                 
                 print(response)
             } catch {
-                let errorMessage = MSGMessage(id: messages.flatMap { $0 }.count + 1, body: .text(error.localizedDescription), user: tim, sentAt: Date())
+                let errorMessage = MSGMessage(id: messages.flatMap { $0 }.count + 1, body: .text(error.localizedDescription), user: chatgpt, sentAt: Date())
                 insert(errorMessage)
                 
                 print(error.localizedDescription)
