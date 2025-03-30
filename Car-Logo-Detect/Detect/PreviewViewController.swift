@@ -98,10 +98,32 @@ class PreviewViewController: UIViewController {
         if confidence >= 0.3 {
             resultAlertController = UIAlertController(title: "Success",
                                                       message: brand, preferredStyle: .alert)
+            
+            // TODO: - Go to Wiki page and search this brand's info automatically
+            let searchBrandAction = UIAlertAction(title: "Search \(brand)'s information", style: .default, handler: { [weak self] _ in
+                guard let self else { return }
+                dismiss(animated: true)
+            })
+            resultAlertController?.addAction(searchBrandAction)
+            
+            // TODO: - Go to Price page and search the prices of this brand automatically
+            let searchPriceAction = UIAlertAction(title: "Search \(brand)'s prices", style: .default, handler: { [weak self] _ in
+                guard let self else { return }
+                dismiss(animated: true)
+            })
+            resultAlertController?.addAction(searchPriceAction)
+
+            // TODO: - Go to Chatbot page and ask the information of this brand to AI assistant automatically
+            let askAIAction = UIAlertAction(title: "Ask \(brand) to AI assistant", style: .default, handler: { [weak self] _ in
+                guard let self else { return }
+                dismiss(animated: true)
+            })
+            resultAlertController?.addAction(askAIAction)
         } else {
             resultAlertController = UIAlertController(title: "Error",
                                                       message: "Please retry", preferredStyle: .alert)
         }
+        
         guard let resultAlertController else { return }
         
         let returnToHomeAction = UIAlertAction(title: "Return", style: .default, handler: { [weak self] _ in
