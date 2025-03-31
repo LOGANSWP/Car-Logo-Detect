@@ -42,13 +42,13 @@ class PriceDataModel {
     // Define callback closure
     var onDataLoaded: (([PriceResult]) -> Void)?
     
-    init(pageNumber: Int) {
-        loadJSONData(pageNumber: pageNumber)
+    init(make: String, pageNumber: Int) {
+        loadJSONData(make: make, pageNumber: pageNumber)
     }
     
-    private func loadJSONData(pageNumber: Int) {
+    private func loadJSONData(make: String, pageNumber: Int) {
         // Pagination
-        let urlString = "https://auto.dev/api/listings?apikey=ZrQEPSkKc3V3ZWlwZW5nMTAyNUBnbWFpbC5jb20=&page=\(pageNumber)"
+        let urlString = "https://auto.dev/api/listings?apikey=ZrQEPSkKc3V3ZWlwZW5nMTAyNUBnbWFpbC5jb20=&make=\(make)&page=\(pageNumber)"
 
         guard let url = URL(string: urlString) else {
             print("Invalid URL")

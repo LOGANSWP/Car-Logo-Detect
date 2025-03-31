@@ -14,7 +14,10 @@ import RxCocoa
 class CarPriceCollectionViewController: UIViewController {
     private let disposeBag = DisposeBag()
 
-    private var priceList: [PriceResult] = []
+    private var filteredPriceList: [PriceResult] = []
+    
+    private var make: String
+    private var pageNumber: Int
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -32,13 +35,13 @@ class CarPriceCollectionViewController: UIViewController {
         return collectionView
     }()
     
-    init(pageNumber: Int) {
+    init(make: String, pageNumber: Int) {
+        self.make = make
+        self.pageNumber = pageNumber
+        
         super.init(nibName: nil, bundle: nil)
         
-        PriceDataModel(pageNumber: pageNumber).onDataLoaded = { [weak self] models in
-            self?.priceList = models
-            self?.collectionView.reloadData()
-        }
+        loadData(make: make, pageNumber: pageNumber)
     }
     
     required init?(coder: NSCoder) {
@@ -58,9 +61,7 @@ class CarPriceCollectionViewController: UIViewController {
         view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.left.right.equalToSuperview().inset(30)
-            make.bottom.equalToSuperview()
+            make.edges.equalToSuperview().inset(30)
         }
     }
     
@@ -68,23 +69,38 @@ class CarPriceCollectionViewController: UIViewController {
         collectionView.rx.itemSelected
             .subscribe(onNext: { [weak self] indexPath in
                 guard let self else { return }
-                let item = priceList[indexPath.item]
+                let item = filteredPriceList[indexPath.item]
                 present(CarPriceDetailViewController(item: item), animated: true)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func loadData(make: String, pageNumber: Int) {
+        PriceDataModel(make: make, pageNumber: pageNumber).onDataLoaded = { [weak self] models in
+            self?.filteredPriceList = models
+            self?.collectionView.reloadData()
+        }
+    }
+    
+    // Let `CarPricePagingViewController` update data
+    func updateMake(_ newMake: String) {
+        if newMake != make {
+            make = newMake
+            loadData(make: newMake, pageNumber: pageNumber)
+        }
     }
 }
 
 extension CarPriceCollectionViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        priceList.count
+        filteredPriceList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarPriceCell.identifier, for: indexPath) as? CarPriceCell else {
             fatalError("Unable to dequeue AlbumCollectionViewCell")
         }
-        let item = priceList[indexPath.item]
+        let item = filteredPriceList[indexPath.item]
         cell.makeModelLabel.text = "\(item.make ?? ""): \(item.model ?? "")"
         cell.priceLabel.text = "\(item.price ?? "")"
         return cell
