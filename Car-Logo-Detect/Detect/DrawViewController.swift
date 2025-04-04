@@ -68,7 +68,8 @@ class DrawViewController: UIViewController, PKCanvasViewDelegate, PKToolPickerOb
         let drawing = canvasView.drawing
         let image = drawing.image(from: canvasView.bounds, scale: UIScreen.main.scale)
         
-        present(PreviewViewController(image: image), animated: true)
+        //present(PreviewViewController(image: image), animated: true)
+        navigationController?.pushViewController(PreviewViewController(image: image), animated: true)
     }
     
     @objc private func undoTapped() {

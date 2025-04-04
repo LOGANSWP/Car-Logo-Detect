@@ -17,6 +17,10 @@ class CarBrandCollectionViewController: UIViewController {
     private var carBrandlist: [VehicleLogoItem] = LogoDataModel().logoData
     private var filteredBrandlist: [VehicleLogoItem] = []
     
+    private var initialBrand: String?
+    
+    private var hasPerformedInitialSelection = false  // Prevent from repeating auto selection
+    
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "Search by brand name"
@@ -38,6 +42,21 @@ class CarBrandCollectionViewController: UIViewController {
         collectionView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 30, right: 0)
         return collectionView
     }()
+    
+    // Default init
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    // Init with brand
+    convenience init(brand: String) {
+        self.init()
+        self.initialBrand = brand
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +69,20 @@ class CarBrandCollectionViewController: UIViewController {
         tapGesture.cancelsTouchesInView = false // Allow tap event to continue passing
         view.addGestureRecognizer(tapGesture)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            
+            // Select match brand automatically
+            if !hasPerformedInitialSelection, let brand = initialBrand {
+                hasPerformedInitialSelection = true
+                if let index = filteredBrandlist.firstIndex(where: { $0.brandName.lowercased() == brand.lowercased() }) {
+                    let indexPath = IndexPath(item: index, section: 0)
+                    collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
+                    collectionView.delegate?.collectionView?(collectionView, didSelectItemAt: indexPath)
+                }
+            }
+        }
     
     private func setupViews() {
         view.backgroundColor = .white

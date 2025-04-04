@@ -150,7 +150,8 @@ class MainViewController: UIViewController {
                 let ps = ZLPhotoPreviewSheet()
                 ps.selectImageBlock = { [weak self] results, isOriginal in
                     guard let self else { return }
-                    present(PreviewViewController(image: results[0].image), animated: true)
+                    //present(PreviewViewController(image: results[0].image), animated: true)
+                    navigationController?.pushViewController(PreviewViewController(image: results[0].image), animated: true)
                 }
                 ps.showPhotoLibrary(sender: self)
             })

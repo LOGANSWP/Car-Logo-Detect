@@ -78,7 +78,7 @@ class PreviewViewController: UIViewController {
         
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(50)
+            make.top.equalToSuperview().offset(100)
         }
         
         imageView.snp.makeConstraints { make in
@@ -103,6 +103,9 @@ class PreviewViewController: UIViewController {
             let searchBrandAction = UIAlertAction(title: "Search \(brand)'s information", style: .default, handler: { [weak self] _ in
                 guard let self else { return }
                 dismiss(animated: true)
+                
+                let vc = CarBrandCollectionViewController(brand: brand)
+                navigationController?.pushViewController(vc, animated: true)
             })
             resultAlertController?.addAction(searchBrandAction)
             
