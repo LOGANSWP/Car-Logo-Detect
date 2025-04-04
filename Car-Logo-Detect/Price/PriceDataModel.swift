@@ -48,7 +48,7 @@ class PriceDataModel {
     
     private func loadJSONData(make: String, pageNumber: Int) {
         // Pagination
-        let urlString = "https://auto.dev/api/listings?apikey=\(APIKeys.autoDevAPI)&make=\(make)&page=\(pageNumber)"
+        let urlString = "https://auto.dev/api/listings?apikey=\(APIKeys.autoDevAPIKey)&make=\(make)&page=\(pageNumber)"
 
         guard let url = URL(string: urlString) else {
             print("Invalid URL")

@@ -21,6 +21,13 @@ class CarPricePagingViewController: UIViewController {
         return searchBar
     }()
     
+    private let priceSegmentedControl: UISegmentedControl = {
+        let items = ["Null", "< 10000$", "10000$ ~ 20000$", "20000$ ~ 30000$", "30000$ ~ 40000$"]
+        let control = UISegmentedControl(items: items)
+        control.selectedSegmentIndex = 0
+        return control
+    }()
+    
     private let pagingViewController = PagingViewController()
     private var currentSearchText: String = ""
     
@@ -54,6 +61,7 @@ class CarPricePagingViewController: UIViewController {
         
         addChild(pagingViewController)
         view.addSubview(searchBar)
+        view.addSubview(priceSegmentedControl)
         view.addSubview(pagingViewController.view)
         pagingViewController.didMove(toParent: self)
         
@@ -62,8 +70,13 @@ class CarPricePagingViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
         }
         
+        priceSegmentedControl.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(8)
+            make.left.right.equalToSuperview().inset(16)
+        }
+        
         pagingViewController.view.snp.makeConstraints { make in
-            make.top.equalTo(searchBar.snp.bottom).offset(10)
+            make.top.equalTo(priceSegmentedControl.snp.bottom).offset(10)
             make.left.right.bottom.equalToSuperview()
         }
         

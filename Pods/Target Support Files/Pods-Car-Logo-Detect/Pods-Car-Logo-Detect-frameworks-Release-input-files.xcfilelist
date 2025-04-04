@@ -11,3 +11,4 @@ ${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
 ${BUILT_PRODUCTS_DIR}/Sketch/Sketch.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework
 ${BUILT_PRODUCTS_DIR}/ZLPhotoBrowser/ZLPhotoBrowser.framework
+${BUILT_PRODUCTS_DIR}/iOSDropDown/iOSDropDown.framework
