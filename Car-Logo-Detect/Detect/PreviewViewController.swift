@@ -99,7 +99,7 @@ class PreviewViewController: UIViewController {
             resultAlertController = UIAlertController(title: "Success",
                                                       message: brand, preferredStyle: .alert)
             
-            // TODO: - Go to Wiki page and search this brand's info automatically
+            // Go to Wiki page and search this brand's info automatically
             let searchBrandAction = UIAlertAction(title: "Search \(brand)'s information", style: .default, handler: { [weak self] _ in
                 guard let self else { return }
                 dismiss(animated: true)
@@ -109,10 +109,13 @@ class PreviewViewController: UIViewController {
             })
             resultAlertController?.addAction(searchBrandAction)
             
-            // TODO: - Go to Price page and search the prices of this brand automatically
+            // Go to Price page and search the prices of this brand automatically
             let searchPriceAction = UIAlertAction(title: "Search \(brand)'s prices", style: .default, handler: { [weak self] _ in
                 guard let self else { return }
                 dismiss(animated: true)
+                
+                let vc = CarPricePagingViewController(brand: brand)
+                navigationController?.pushViewController(vc, animated: true)
             })
             resultAlertController?.addAction(searchPriceAction)
 
