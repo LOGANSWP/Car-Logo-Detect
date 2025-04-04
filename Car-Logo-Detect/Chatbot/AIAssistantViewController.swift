@@ -28,6 +28,22 @@ class AIAssistantViewController: MSGMessengerViewController {
             ]
         ]
     }()
+    
+    private var initialBrand: String?
+    private var hasSentInitialBrand = false
+
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    convenience init(brand: String) {
+        self.init()
+        self.initialBrand = brand
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +51,23 @@ class AIAssistantViewController: MSGMessengerViewController {
         dataSource = self
     }
     
-    // Override the inputViewPrimaryActionTriggered to simulate Tim sending a message
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if let brand = initialBrand, !hasSentInitialBrand {
+            hasSentInitialBrand = true
+            sendAndRetriveMessage(messageText: "Can you tell me something about \(brand)?")
+        }
+    }
+    
+    // Override the inputViewPrimaryActionTriggered to simulate Tim sending a message with keyboard input
     override func inputViewPrimaryActionTriggered(inputView: MSGInputView) {
         // Get the message text entered by the user (Tim in this case)
         let messageText = inputView.message
+        sendAndRetriveMessage(messageText: messageText)
+    }
+    
+    private func sendAndRetriveMessage(messageText: String) {
         guard !messageText.isEmpty else { return }
 
         // Create a new message by Tim

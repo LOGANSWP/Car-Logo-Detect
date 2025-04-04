@@ -119,10 +119,13 @@ class PreviewViewController: UIViewController {
             })
             resultAlertController?.addAction(searchPriceAction)
 
-            // TODO: - Go to Chatbot page and ask the information of this brand to AI assistant automatically
+            // Go to Chatbot page and ask the information of this brand to AI assistant automatically
             let askAIAction = UIAlertAction(title: "Ask \(brand) to AI assistant", style: .default, handler: { [weak self] _ in
                 guard let self else { return }
                 dismiss(animated: true)
+                
+                let vc = AIAssistantViewController(brand: brand)
+                navigationController?.pushViewController(vc, animated: true)
             })
             resultAlertController?.addAction(askAIAction)
         } else {
