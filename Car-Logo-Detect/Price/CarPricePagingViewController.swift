@@ -22,21 +22,6 @@ class CarPricePagingViewController: UIViewController {
         return searchBar
     }()
     
-    private let minPriceDropDown: DropDown = {
-        let dropDown = DropDown()
-        dropDown.optionArray = ["0", "10000", "20000", "30000", "40000", "50000", "60000", "70000", "80000", "90000", "100000"]
-        dropDown.placeholder = "Select a min price $"
-        dropDown.isSearchEnable = false
-        dropDown.cornerRadius = 8
-        dropDown.arrowColor = .clear
-        dropDown.backgroundColor = .green
-        dropDown.borderColor = .gray
-        dropDown.borderWidth = 2
-        dropDown.borderStyle = .roundedRect
-        dropDown.textAlignment = .center
-        return dropDown
-    }()
-    
     private let maxPriceDropDown: DropDown = {
         let dropDown = DropDown()
         dropDown.optionArray = ["10000", "20000", "30000", "40000", "50000", "60000", "70000", "80000", "90000", "100000", "♾️"]
@@ -52,8 +37,25 @@ class CarPricePagingViewController: UIViewController {
         return dropDown
     }()
     
+    private let minPriceDropDown: DropDown = {
+        let dropDown = DropDown()
+        dropDown.optionArray = ["0", "10000", "20000", "30000", "40000", "50000", "60000", "70000", "80000", "90000", "100000"]
+        dropDown.placeholder = "Select a min price $"
+        dropDown.isSearchEnable = false
+        dropDown.cornerRadius = 8
+        dropDown.arrowColor = .clear
+        dropDown.backgroundColor = .green
+        dropDown.borderColor = .gray
+        dropDown.borderWidth = 2
+        dropDown.borderStyle = .roundedRect
+        dropDown.textAlignment = .center
+        return dropDown
+    }()
+    
     private let pagingViewController = PagingViewController()
     private var currentSearchText: String = ""
+    private var currentMaxPrice: String = ""
+    private var currentMinPrice: String = ""
     
     private var initialBrand: String?
     
@@ -115,6 +117,28 @@ class CarPricePagingViewController: UIViewController {
         }
         
         setupSearchBinding()
+        
+        maxPriceDropDown.didSelect { [weak self] selectedText, index, id in
+            guard let self else { return }
+            self.currentMaxPrice = selectedText
+            reloadCurrentPage()
+            
+            // Get current visible CarPriceCollectionViewController
+            if let currentVC = pagingViewController.pageViewController.selectedViewController as? CarPriceCollectionViewController {
+                currentVC.updateData(newMake: self.searchBar.text ?? "", newMaxPrice: self.maxPriceDropDown.text ?? "", newMinPrice: self.minPriceDropDown.text ?? "")
+            }
+        }
+
+        minPriceDropDown.didSelect { [weak self] selectedText, index, id in
+            guard let self else { return }
+            self.currentMinPrice = selectedText
+            reloadCurrentPage()
+            
+            // Get current visible CarPriceCollectionViewController
+            if let currentVC = pagingViewController.pageViewController.selectedViewController as? CarPriceCollectionViewController {
+                currentVC.updateData(newMake: self.searchBar.text ?? "", newMaxPrice: self.maxPriceDropDown.text ?? "", newMinPrice: self.minPriceDropDown.text ?? "")
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -126,10 +150,11 @@ class CarPricePagingViewController: UIViewController {
             searchBar.text = brand
             currentSearchText = brand
             searchBar.resignFirstResponder()
+            reloadCurrentPage()
 
             // Proactively notify the current page to refresh the content
             if let currentVC = pagingViewController.pageViewController.selectedViewController as? CarPriceCollectionViewController {
-                currentVC.updateMake(brand)
+                currentVC.updateData(newMake: brand, newMaxPrice: "", newMinPrice: "")
             }
         }
     }
@@ -140,13 +165,22 @@ class CarPricePagingViewController: UIViewController {
                 guard let self else { return }
                 self.currentSearchText = searchBar.text ?? ""
                 self.searchBar.resignFirstResponder() // Turn off keyboard
+                reloadCurrentPage()
                 
                 // Get current visible CarPriceCollectionViewController
                 if let currentVC = pagingViewController.pageViewController.selectedViewController as? CarPriceCollectionViewController {
-                    currentVC.updateMake(self.searchBar.text ?? "")
+                    currentVC.updateData(newMake: self.searchBar.text ?? "", newMaxPrice: self.maxPriceDropDown.text ?? "", newMinPrice: self.minPriceDropDown.text ?? "")
                 }
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func reloadCurrentPage() {
+        let currentItem = pagingViewController.state.currentPagingItem
+        if let item = currentItem as? CarPricePagingItem {
+            // Force to recreate and setup current page
+            pagingViewController.reloadData(around: item)
+        }
     }
 }
 
@@ -163,6 +197,6 @@ extension CarPricePagingViewController: PagingViewControllerInfiniteDataSource {
     
     func pagingViewController(_: PagingViewController, viewControllerFor pagingItem: PagingItem) -> UIViewController {
         let carPricePagingItem = pagingItem as! CarPricePagingItem
-        return CarPriceCollectionViewController(make: currentSearchText, pageNumber: carPricePagingItem.pageNumber)
+        return CarPriceCollectionViewController(make: currentSearchText, maxPrice: currentMaxPrice, minPrice: currentMinPrice, pageNumber: carPricePagingItem.pageNumber)
     }
 }

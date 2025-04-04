@@ -17,6 +17,8 @@ class CarPriceCollectionViewController: UIViewController {
     private var filteredPriceList: [PriceResult] = []
     
     private var make: String
+    private var maxPrice: String
+    private var minPrice: String
     private var pageNumber: Int
     
     private lazy var collectionView: UICollectionView = {
@@ -35,13 +37,15 @@ class CarPriceCollectionViewController: UIViewController {
         return collectionView
     }()
     
-    init(make: String, pageNumber: Int) {
+    init(make: String, maxPrice: String, minPrice: String, pageNumber: Int) {
         self.make = make
+        self.maxPrice = maxPrice
+        self.minPrice = minPrice
         self.pageNumber = pageNumber
         
         super.init(nibName: nil, bundle: nil)
         
-        loadData(make: make, pageNumber: pageNumber)
+        loadData(make: make, maxPrice: maxPrice, minPrice: minPrice, pageNumber: pageNumber)
     }
     
     required init?(coder: NSCoder) {
@@ -75,18 +79,20 @@ class CarPriceCollectionViewController: UIViewController {
             .disposed(by: disposeBag)
     }
     
-    private func loadData(make: String, pageNumber: Int) {
-        PriceDataModel(make: make, pageNumber: pageNumber).onDataLoaded = { [weak self] models in
+    private func loadData(make: String, maxPrice: String, minPrice: String, pageNumber: Int) {
+        PriceDataModel(make: make, maxPrice: maxPrice, minPrice: minPrice, pageNumber: pageNumber).onDataLoaded = { [weak self] models in
             self?.filteredPriceList = models
             self?.collectionView.reloadData()
         }
     }
     
     // Let `CarPricePagingViewController` update data
-    func updateMake(_ newMake: String) {
-        if newMake != make {
+    func updateData(newMake: String, newMaxPrice: String, newMinPrice: String) {
+        if newMake != make || newMaxPrice != maxPrice || newMinPrice != minPrice {
             make = newMake
-            loadData(make: newMake, pageNumber: pageNumber)
+            maxPrice = newMaxPrice
+            minPrice = newMinPrice
+            loadData(make: newMake, maxPrice: maxPrice, minPrice: minPrice, pageNumber: pageNumber)
         }
     }
 }
