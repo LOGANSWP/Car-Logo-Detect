@@ -11,6 +11,7 @@ import SnapKit
 import Parchment
 import RxCocoa
 import RxSwift
+import iOSDropDown
 
 class CarPricePagingViewController: UIViewController {
     private let disposeBag = DisposeBag()
@@ -21,11 +22,34 @@ class CarPricePagingViewController: UIViewController {
         return searchBar
     }()
     
-    private let priceSegmentedControl: UISegmentedControl = {
-        let items = ["Null", "< 10000$", "10000$ ~ 20000$", "20000$ ~ 30000$", "30000$ ~ 40000$"]
-        let control = UISegmentedControl(items: items)
-        control.selectedSegmentIndex = 0
-        return control
+    private let minPriceDropDown: DropDown = {
+        let dropDown = DropDown()
+        dropDown.optionArray = ["0", "10000", "20000", "30000", "40000", "50000", "60000", "70000", "80000", "90000", "100000"]
+        dropDown.placeholder = "Select a min price $"
+        dropDown.isSearchEnable = false
+        dropDown.cornerRadius = 8
+        dropDown.arrowColor = .clear
+        dropDown.backgroundColor = .green
+        dropDown.borderColor = .gray
+        dropDown.borderWidth = 2
+        dropDown.borderStyle = .roundedRect
+        dropDown.textAlignment = .center
+        return dropDown
+    }()
+    
+    private let maxPriceDropDown: DropDown = {
+        let dropDown = DropDown()
+        dropDown.optionArray = ["10000", "20000", "30000", "40000", "50000", "60000", "70000", "80000", "90000", "100000", "♾️"]
+        dropDown.placeholder = "Select a max price $"
+        dropDown.isSearchEnable = false
+        dropDown.cornerRadius = 8
+        dropDown.arrowColor = .clear
+        dropDown.backgroundColor = .green
+        dropDown.borderColor = .gray
+        dropDown.borderWidth = 2
+        dropDown.borderStyle = .roundedRect
+        dropDown.textAlignment = .center
+        return dropDown
     }()
     
     private let pagingViewController = PagingViewController()
@@ -61,7 +85,8 @@ class CarPricePagingViewController: UIViewController {
         
         addChild(pagingViewController)
         view.addSubview(searchBar)
-        view.addSubview(priceSegmentedControl)
+        view.addSubview(minPriceDropDown)
+        view.addSubview(maxPriceDropDown)
         view.addSubview(pagingViewController.view)
         pagingViewController.didMove(toParent: self)
         
@@ -70,13 +95,22 @@ class CarPricePagingViewController: UIViewController {
             make.left.right.equalToSuperview().inset(16)
         }
         
-        priceSegmentedControl.snp.makeConstraints { make in
+        minPriceDropDown.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom).offset(8)
-            make.left.right.equalToSuperview().inset(16)
+            make.left.equalToSuperview().inset(23)
+            make.height.equalTo(50)
+            make.width.equalTo(180)
+        }
+        
+        maxPriceDropDown.snp.makeConstraints { make in
+            make.top.equalTo(searchBar.snp.bottom).offset(8)
+            make.right.equalToSuperview().inset(23)
+            make.height.equalTo(50)
+            make.width.equalTo(180)
         }
         
         pagingViewController.view.snp.makeConstraints { make in
-            make.top.equalTo(priceSegmentedControl.snp.bottom).offset(10)
+            make.top.equalTo(minPriceDropDown.snp.bottom).offset(10)
             make.left.right.bottom.equalToSuperview()
         }
         
