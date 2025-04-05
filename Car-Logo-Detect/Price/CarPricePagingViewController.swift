@@ -144,6 +144,11 @@ class CarPricePagingViewController: UIViewController {
                 currentVC.updateData(newMake: self.searchBar.text ?? "", newMaxPrice: self.maxPriceDropDown.text ?? "", newMinPrice: self.minPriceDropDown.text ?? "")
             }
         }
+        
+        // Add tap gesture to hide the keyboard
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false // Allow tap event to continue passing
+        view.addGestureRecognizer(tapGesture)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -186,6 +191,10 @@ class CarPricePagingViewController: UIViewController {
             // Force to recreate and setup current page
             pagingViewController.reloadData(around: item)
         }
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
 

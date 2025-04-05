@@ -71,18 +71,18 @@ class CarBrandCollectionViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
-            
-            // Select match brand automatically
-            if !hasPerformedInitialSelection, let brand = initialBrand {
-                hasPerformedInitialSelection = true
-                if let index = filteredBrandlist.firstIndex(where: { $0.brandName.lowercased() == brand.lowercased() }) {
-                    let indexPath = IndexPath(item: index, section: 0)
-                    collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
-                    collectionView.delegate?.collectionView?(collectionView, didSelectItemAt: indexPath)
-                }
+        super.viewDidAppear(animated)
+        
+        // Select match brand automatically
+        if !hasPerformedInitialSelection, let brand = initialBrand {
+            hasPerformedInitialSelection = true
+            if let index = filteredBrandlist.firstIndex(where: { $0.brandName.lowercased() == brand.lowercased() }) {
+                let indexPath = IndexPath(item: index, section: 0)
+                collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
+                collectionView.delegate?.collectionView?(collectionView, didSelectItemAt: indexPath)
             }
         }
+    }
     
     private func setupViews() {
         view.backgroundColor = .white
