@@ -31,7 +31,7 @@ class CarBrandCollectionViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10      // The space between each item
-        layout.itemSize = CGSize(width: 300, height: 40)  // The size of each item
+        layout.itemSize = CGSize(width: 380, height: 40)  // The size of each item
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = true
@@ -93,8 +93,7 @@ class CarBrandCollectionViewController: UIViewController {
         
         searchBar.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(50)
+            make.left.right.equalToSuperview().inset(16)
         }
         
         collectionView.snp.makeConstraints { make in
