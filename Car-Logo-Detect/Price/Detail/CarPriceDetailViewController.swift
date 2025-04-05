@@ -28,6 +28,18 @@ class CarPriceDetailViewController: FormViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        form +++ Section(){ section in
+            section.header = {
+                var header = HeaderFooterView<UILabel>(.callback({
+                    let title = UILabel()
+                    title.backgroundColor = .clear
+                    return title
+                }))
+                header.height = { 30 }
+                return header
+            }()
+        }
+        
         form +++ Section(){ [weak self] section in
             section.header = {
                 var header = HeaderFooterView<UIImageView>(.callback({
@@ -50,6 +62,18 @@ class CarPriceDetailViewController: FormViewController {
                     return imageView
                 }))
                 header.height = { 300 }
+                return header
+            }()
+        }
+        
+        form +++ Section(){ section in
+            section.header = {
+                var header = HeaderFooterView<UILabel>(.callback({
+                    let title = UILabel()
+                    title.backgroundColor = .clear
+                    return title
+                }))
+                header.height = { 10 }
                 return header
             }()
         }
