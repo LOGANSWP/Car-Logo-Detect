@@ -33,7 +33,7 @@ class PreviewViewController: UIViewController {
     
     private lazy var detectButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "logo.xbox"), for: .normal)
+        button.setImage(UIImage(systemName: "record.circle"), for: .normal)
         button.tintColor = .systemBlue
         button.backgroundColor = .clear
         button.layer.cornerRadius = 64
