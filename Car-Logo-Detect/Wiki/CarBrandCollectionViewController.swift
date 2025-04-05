@@ -30,16 +30,16 @@ class CarBrandCollectionViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 20      // The space between each item
-        layout.itemSize = CGSize(width: 300, height: 75)  // The size of each item
+        layout.minimumLineSpacing = 10      // The space between each item
+        layout.itemSize = CGSize(width: 300, height: 40)  // The size of each item
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = true
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.register(CarBrandCell.self, forCellWithReuseIdentifier: CarBrandCell.identifier)
         
-        collectionView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 30, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         return collectionView
     }()
     
@@ -99,7 +99,7 @@ class CarBrandCollectionViewController: UIViewController {
         
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(searchBar.snp.bottom)
-            make.left.right.equalToSuperview().inset(30)
+            make.left.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
     }
