@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import NVActivityIndicatorView
 
 class PreviewViewController: UIViewController {
     private let disposeBag = DisposeBag()
@@ -43,15 +44,36 @@ class PreviewViewController: UIViewController {
         button.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self, let image = imageView.image else { return }
+                DispatchQueue.main.async {
+                    self.loadingOverlay.isHidden = false
+                    self.loadingAnim.startAnimating()
+                }
+                
                 // Test For car logo detect api
                 FreeApiAccess.shared.recognizeLogo(image: image) { [weak self] confidence, brand in
-                    DispatchQueue.main.async {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.loadingOverlay.isHidden = true
+                        self?.loadingAnim.stopAnimating()
                         self?.setupResultAlert(confidence: confidence, brand: brand)
                     }
                 }
             })
             .disposed(by: disposeBag)
         return button
+    }()
+    
+    private lazy var loadingAnim: NVActivityIndicatorView = {
+        let loadingAnim = NVActivityIndicatorView(frame: .zero)
+        loadingAnim.type = .lineScale
+        loadingAnim.color = .white
+        return loadingAnim
+    }()
+    
+    private lazy var loadingOverlay: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        view.isHidden = true
+        return view
     }()
     
     private var resultAlertController: UIAlertController?
@@ -75,6 +97,8 @@ class PreviewViewController: UIViewController {
         view.addSubview(titleLabel)
         view.addSubview(imageView)
         view.addSubview(detectButton)
+        view.addSubview(loadingOverlay)
+        loadingOverlay.addSubview(loadingAnim)
         
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -91,6 +115,15 @@ class PreviewViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(imageView.snp.bottom).offset(100)
             make.width.height.equalTo(128)
+        }
+        
+        loadingOverlay.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        loadingAnim.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.height.width.equalTo(100)
         }
     }
     
@@ -137,7 +170,7 @@ class PreviewViewController: UIViewController {
         
         let returnToHomeAction = UIAlertAction(title: "Return", style: .default, handler: { [weak self] _ in
             guard let self else { return }
-            dismiss(animated: true)
+            navigationController?.popViewController(animated: true)
         })
         resultAlertController.addAction(returnToHomeAction)
         
