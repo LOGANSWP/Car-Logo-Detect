@@ -111,16 +111,39 @@ class CarPriceDetailViewController: FormViewController {
             row.value = priceItem.trim
         }
         <<< LabelRow(){ row in
-            row.title = "Click Off URL"
-            row.value = priceItem.clickoffUrl
-        }
-        <<< LabelRow(){ row in
             row.title = "Body Type"
             row.value = priceItem.bodyType
         }
         <<< LabelRow(){ row in
             row.title = "Body Style"
             row.value = priceItem.bodyStyle
+        }
+        <<< ButtonRow() { row in
+            row.title = "Click to View in Browser"
+        }.onCellSelection { [weak self] cell, row in
+            guard let self,
+                  var urlString = self.priceItem.clickoffUrl else {
+                return
+            }
+
+            // Check whether the prefix contains http or https
+            if !urlString.hasPrefix("http://") && !urlString.hasPrefix("https://") {
+                urlString = "https://" + urlString
+            }
+
+            guard let url = URL(string: urlString),
+                  UIApplication.shared.canOpenURL(url) else {
+                print("Invalid URL")
+                return
+            }
+
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+        <<< ButtonRow() { row in
+            row.title = "Click to ask AI car consultant"
+        }.onCellSelection { [weak self] cell, row in
+            guard let self else { return }
+            present(AIAssistantViewController(priceResult: priceItem), animated: true)
         }
     }
 }

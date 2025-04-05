@@ -31,6 +31,9 @@ class AIAssistantViewController: MSGMessengerViewController {
     
     private var initialBrand: String?
     private var hasSentInitialBrand = false
+    
+    private var initailPriceResult: PriceResult?
+    private var hasSentInitialPriceResult = false
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -39,6 +42,11 @@ class AIAssistantViewController: MSGMessengerViewController {
     convenience init(brand: String) {
         self.init()
         self.initialBrand = brand
+    }
+    
+    convenience init(priceResult: PriceResult) {
+        self.init()
+        self.initailPriceResult = priceResult
     }
 
     required init?(coder: NSCoder) {
@@ -58,6 +66,11 @@ class AIAssistantViewController: MSGMessengerViewController {
             hasSentInitialBrand = true
             sendAndRetriveMessage(messageText: "Can you tell me something about \(brand)?")
         }
+        
+        if let priceResult = initailPriceResult, !hasSentInitialPriceResult {
+            hasSentInitialPriceResult = true
+            sendAndRetriveMessageWithOptimization(messageTextWantToShow: "What do you think of this \(priceResult.make ?? "") \(priceResult.model ?? "") \(priceResult.bodyType ?? "")? Is it worth buying?", messageTextWantToSendToAI: "What do you think of this car: \(priceResult)? Is it worth buying?")
+        }
     }
     
     // Override the inputViewPrimaryActionTriggered to simulate Tim sending a message with keyboard input
@@ -70,7 +83,6 @@ class AIAssistantViewController: MSGMessengerViewController {
     private func sendAndRetriveMessage(messageText: String) {
         guard !messageText.isEmpty else { return }
 
-        // Create a new message by Tim
         let steveMessage = MSGMessage(id: messages.flatMap { $0 }.count + 1, body: .text(messageText), user: steve, sentAt: Date())
 
         // Insert the new message into the conversation
@@ -79,6 +91,30 @@ class AIAssistantViewController: MSGMessengerViewController {
         Task {
             do {
                 let response = try await api.sendMessage(text: messageText)
+                let timMessage = MSGMessage(id: messages.flatMap { $0 }.count + 1, body: .text(response), user: chatgpt, sentAt: Date())
+                insert(timMessage)
+                
+                print(response)
+            } catch {
+                let errorMessage = MSGMessage(id: messages.flatMap { $0 }.count + 1, body: .text(error.localizedDescription), user: chatgpt, sentAt: Date())
+                insert(errorMessage)
+                
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    private func sendAndRetriveMessageWithOptimization(messageTextWantToShow: String, messageTextWantToSendToAI: String) {
+        guard !messageTextWantToShow.isEmpty, !messageTextWantToSendToAI.isEmpty else { return }
+
+        let steveMessage = MSGMessage(id: messages.flatMap { $0 }.count + 1, body: .text(messageTextWantToShow), user: steve, sentAt: Date())
+
+        // Insert the new message into the conversation
+        insert(steveMessage)
+        
+        Task {
+            do {
+                let response = try await api.sendMessage(text: messageTextWantToSendToAI)
                 let timMessage = MSGMessage(id: messages.flatMap { $0 }.count + 1, body: .text(response), user: chatgpt, sentAt: Date())
                 insert(timMessage)
                 
