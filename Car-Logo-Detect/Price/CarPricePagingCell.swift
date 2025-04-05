@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Parchment
+import SnapKit
 
 class CarPricePagingCell: PagingCell {
     private let label = UILabel()
@@ -25,17 +26,18 @@ class CarPricePagingCell: PagingCell {
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         contentView.addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
-        ])
+        contentView.layer.cornerRadius = 8
+        contentView.layer.masksToBounds = true
+        
+        label.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
     }
 
     override func setPagingItem(_ pagingItem: PagingItem, selected: Bool, options: PagingOptions) {
         guard let item = pagingItem as? CarPricePagingItem else { return }
         label.text = "\(item.pageNumber)"
         label.textColor = selected ? .white : .gray
-        contentView.backgroundColor = selected ? .blue : .lightGray
+        contentView.backgroundColor = selected ? .systemBlue : .systemGray6
     }
 }

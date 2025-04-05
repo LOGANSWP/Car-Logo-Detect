@@ -15,14 +15,14 @@ class CarPriceCell: UICollectionViewCell {
     lazy var makeModelLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.backgroundColor = .yellow
+        label.backgroundColor = .systemGray6
         return label
     }()
     
     lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.backgroundColor = .systemBlue
+        label.backgroundColor = .systemGray6
         return label
     }()
     
@@ -37,6 +37,8 @@ class CarPriceCell: UICollectionViewCell {
     
     private func setupViews() {
         contentView.backgroundColor = .green
+        contentView.layer.cornerRadius = 8
+        contentView.layer.masksToBounds = true
         contentView.addSubview(makeModelLabel)
         contentView.addSubview(priceLabel)
         

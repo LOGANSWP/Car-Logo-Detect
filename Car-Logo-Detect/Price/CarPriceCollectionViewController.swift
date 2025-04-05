@@ -24,16 +24,16 @@ class CarPriceCollectionViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 20      // The space between each item
-        layout.itemSize = CGSize(width: 300, height: 75)  // The size of each item
+        layout.minimumLineSpacing = 10      // The space between each item
+        layout.itemSize = CGSize(width: 380, height: 60)  // The size of each item
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = true
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.register(CarPriceCell.self, forCellWithReuseIdentifier: CarPriceCell.identifier)
         
-        collectionView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 30, right: 0)
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         return collectionView
     }()
     
@@ -65,7 +65,8 @@ class CarPriceCollectionViewController: UIViewController {
         view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview().inset(30)
+            make.top.bottom.equalToSuperview().inset(10)
+            make.left.right.equalToSuperview()
         }
     }
     

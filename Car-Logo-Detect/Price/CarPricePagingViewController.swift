@@ -28,12 +28,12 @@ class CarPricePagingViewController: UIViewController {
         dropDown.placeholder = "Select a max price $"
         dropDown.isSearchEnable = false
         dropDown.cornerRadius = 8
+        dropDown.layer.masksToBounds = true
         dropDown.arrowColor = .clear
-        dropDown.backgroundColor = .green
-        dropDown.borderColor = .gray
-        dropDown.borderWidth = 2
-        dropDown.borderStyle = .roundedRect
+        dropDown.backgroundColor = .systemGray6
+        dropDown.selectedRowColor = .lightGray
         dropDown.textAlignment = .center
+        dropDown.listHeight = 330
         return dropDown
     }()
     
@@ -43,12 +43,12 @@ class CarPricePagingViewController: UIViewController {
         dropDown.placeholder = "Select a min price $"
         dropDown.isSearchEnable = false
         dropDown.cornerRadius = 8
+        dropDown.layer.masksToBounds = true
         dropDown.arrowColor = .clear
-        dropDown.backgroundColor = .green
-        dropDown.borderColor = .gray
-        dropDown.borderWidth = 2
-        dropDown.borderStyle = .roundedRect
+        dropDown.backgroundColor = .systemGray6
+        dropDown.selectedRowColor = .lightGray
         dropDown.textAlignment = .center
+        dropDown.listHeight = 330
         return dropDown
     }()
     
@@ -85,6 +85,9 @@ class CarPricePagingViewController: UIViewController {
         pagingViewController.infiniteDataSource = self
         pagingViewController.select(pagingItem: CarPricePagingItem(pageNumber: 1))
         
+        pagingViewController.indicatorOptions = .hidden
+        pagingViewController.borderOptions = .hidden
+        
         addChild(pagingViewController)
         view.addSubview(searchBar)
         view.addSubview(minPriceDropDown)
@@ -112,8 +115,10 @@ class CarPricePagingViewController: UIViewController {
         }
         
         pagingViewController.view.snp.makeConstraints { make in
-            make.top.equalTo(minPriceDropDown.snp.bottom).offset(10)
-            make.left.right.bottom.equalToSuperview()
+            make.top.equalTo(minPriceDropDown.snp.bottom).offset(20)
+            make.bottom.equalToSuperview()
+            make.left.equalTo(minPriceDropDown)
+            make.right.equalTo(maxPriceDropDown)
         }
         
         setupSearchBinding()
