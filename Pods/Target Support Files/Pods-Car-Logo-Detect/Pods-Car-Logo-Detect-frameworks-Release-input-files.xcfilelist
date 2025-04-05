@@ -3,6 +3,7 @@ ${BUILT_PRODUCTS_DIR}/ChatGPTSwift/ChatGPTSwift.framework
 ${BUILT_PRODUCTS_DIR}/Eureka/Eureka.framework
 ${BUILT_PRODUCTS_DIR}/GPTEncoder/GPTEncoder.framework
 ${BUILT_PRODUCTS_DIR}/MessengerKit/MessengerKit.framework
+${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework
 ${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework
 ${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework
 ${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework

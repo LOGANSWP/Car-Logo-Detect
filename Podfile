@@ -17,6 +17,7 @@ target 'Car-Logo-Detect' do
   pod 'MessengerKit', :git => 'https://github.com/steve228uk/MessengerKit.git'
   pod 'ChatGPTSwift', '~> 1.3.1'
   pod 'iOSDropDown'
+  pod 'NVActivityIndicatorView'
   # Pods for Car-Logo-Detect
 
 end

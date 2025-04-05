@@ -8,6 +8,9 @@ PODS:
     - LookinServer/Core (= 1.2.8)
   - LookinServer/Core (1.2.8)
   - MessengerKit (1.0.5)
+  - NVActivityIndicatorView (5.2.0):
+    - NVActivityIndicatorView/Base (= 5.2.0)
+  - NVActivityIndicatorView/Base (5.2.0)
   - Parchment (4.1.0)
   - RxCocoa (6.8.0):
     - RxRelay (= 6.8.0)
@@ -30,6 +33,7 @@ DEPENDENCIES:
   - iOSDropDown
   - LookinServer
   - MessengerKit (from `https://github.com/steve228uk/MessengerKit.git`)
+  - NVActivityIndicatorView
   - Parchment (~> 4.0)
   - RxCocoa (= 6.8.0)
   - RxSwift (= 6.8.0)
@@ -45,6 +49,7 @@ SPEC REPOS:
     - GPTEncoder
     - iOSDropDown
     - LookinServer
+    - NVActivityIndicatorView
     - Parchment
     - RxCocoa
     - RxRelay
@@ -70,6 +75,7 @@ SPEC CHECKSUMS:
   iOSDropDown: ce9daa584eaa5567cafc1b633e3cc7eb6d9cea42
   LookinServer: 1b2b61c6402ae29fa22182d48f5cd067b4e99e80
   MessengerKit: 26dbfa81b76b22b7891028fb9a2cefdf4e86236f
+  NVActivityIndicatorView: fe52a6a68664c2df8991d7d9e3d86d8d19453c53
   Parchment: fdea264f5de6d73b0b69a31c686fab762c78ed2f
   RxCocoa: 2d33c1e1e5d66492052ad46b11024ae287572880
   RxRelay: 335c78b926a2aea8d863a6d25f1ed3b5ad8e8705
@@ -79,6 +85,6 @@ SPEC CHECKSUMS:
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   ZLPhotoBrowser: 04c8a5c5299a3b5945c60bd0e676c16d1215b14c
 
-PODFILE CHECKSUM: 14b52adc98b3dccac708380c5088101bb6588f2b
+PODFILE CHECKSUM: 0bb0ded47ba59a0d79df020a3146e70a6260c834
 
 COCOAPODS: 1.16.2
