@@ -18,7 +18,6 @@ target 'Car-Logo-Detect' do
   pod 'ChatGPTSwift', '~> 1.3.1'
   pod 'iOSDropDown'
   pod 'NVActivityIndicatorView'
-  pod "BouncyLayout"
   # Pods for Car-Logo-Detect
 
 end
