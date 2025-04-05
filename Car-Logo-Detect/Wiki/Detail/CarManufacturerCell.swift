@@ -15,7 +15,7 @@ class CarManufacturerCell: UICollectionViewCell {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.backgroundColor = .yellow
+        label.backgroundColor = .systemGray6
         return label
     }()
     
@@ -29,7 +29,9 @@ class CarManufacturerCell: UICollectionViewCell {
     }
     
     private func setupViews() {
-        contentView.backgroundColor = .green
+        contentView.backgroundColor = .clear
+        contentView.layer.cornerRadius = 8
+        contentView.layer.masksToBounds = true
         contentView.addSubview(titleLabel)
         
         titleLabel.snp.makeConstraints { make in

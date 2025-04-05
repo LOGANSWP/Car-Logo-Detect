@@ -20,7 +20,7 @@ class CarBrandDetailViewController: UIViewController {
         
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.backgroundColor = .brown
+        scrollView.backgroundColor = .white
         scrollView.isScrollEnabled = true
         scrollView.showsVerticalScrollIndicator = true
         return scrollView
@@ -29,7 +29,7 @@ class CarBrandDetailViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.backgroundColor = .yellow
+        label.backgroundColor = .clear
         label.font = UIFont.boldSystemFont(ofSize: 48)
         return label
     }()
@@ -37,8 +37,17 @@ class CarBrandDetailViewController: UIViewController {
     private lazy var imageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
-        view.backgroundColor = .gray
+        view.backgroundColor = .clear
         return view
+    }()
+    
+    private lazy var manufacturerTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.text = "Manufacturers"
+        return label
     }()
     
     private lazy var manufacturerCollectionView: UICollectionView = {
@@ -49,12 +58,21 @@ class CarBrandDetailViewController: UIViewController {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = true
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.register(CarManufacturerCell.self, forCellWithReuseIdentifier: CarManufacturerCell.identifier)
         
         collectionView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         return collectionView
+    }()
+    
+    private lazy var modelTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        label.backgroundColor = .clear
+        label.font = UIFont.boldSystemFont(ofSize: 24)
+        label.text = "Models"
+        return label
     }()
     
     private lazy var modelCollectionView: UICollectionView = {
@@ -65,7 +83,7 @@ class CarBrandDetailViewController: UIViewController {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = true
-        collectionView.backgroundColor = .red
+        collectionView.backgroundColor = .clear
         collectionView.dataSource = self
         collectionView.register(CarModelCell.self, forCellWithReuseIdentifier: CarModelCell.identifier)
         
@@ -122,7 +140,9 @@ class CarBrandDetailViewController: UIViewController {
         
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(imageView)
+        scrollView.addSubview(manufacturerTitleLabel)
         scrollView.addSubview(manufacturerCollectionView)
+        scrollView.addSubview(modelTitleLabel)
         scrollView.addSubview(modelCollectionView)
         
         scrollView.snp.makeConstraints { make in
@@ -136,20 +156,30 @@ class CarBrandDetailViewController: UIViewController {
         
         imageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(50)
+            make.top.equalTo(titleLabel.snp.bottom).offset(30)
             make.width.equalToSuperview()
             make.height.equalTo(300)
         }
         
-        manufacturerCollectionView.snp.makeConstraints { make in
+        manufacturerTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(imageView.snp.bottom).offset(50)
+            make.centerX.equalToSuperview()
+        }
+        
+        manufacturerCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(manufacturerTitleLabel.snp.bottom)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().inset(30)
             make.height.equalTo(300)
         }
         
-        modelCollectionView.snp.makeConstraints { make in
+        modelTitleLabel.snp.makeConstraints { make in
             make.top.equalTo(manufacturerCollectionView.snp.bottom).offset(50)
+            make.centerX.equalToSuperview()
+        }
+        
+        modelCollectionView.snp.makeConstraints { make in
+            make.top.equalTo(modelTitleLabel.snp.bottom)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().inset(30)
             make.height.equalTo(300)
