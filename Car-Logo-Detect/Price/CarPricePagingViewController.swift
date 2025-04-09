@@ -52,6 +52,14 @@ class CarPricePagingViewController: UIViewController {
         return dropDown
     }()
     
+    private lazy var priceErrorAlertController: UIAlertController = {
+        let alertController = UIAlertController(title: "Price Error",
+                                message: "Min price should be always lower than or equal to Max price.", preferredStyle: .alert)
+        let knownAction = UIAlertAction(title: "Known", style: .cancel, handler: nil)
+        alertController.addAction(knownAction)
+        return alertController
+    }()
+    
     private let pagingViewController = PagingViewController()
     private var currentSearchText: String = ""
     private var currentMaxPrice: String = ""
@@ -132,6 +140,8 @@ class CarPricePagingViewController: UIViewController {
             if let currentVC = pagingViewController.pageViewController.selectedViewController as? CarPriceCollectionViewController {
                 currentVC.updateData(newMake: self.searchBar.text ?? "", newMaxPrice: self.maxPriceDropDown.text ?? "", newMinPrice: self.minPriceDropDown.text ?? "")
             }
+            
+            priceErrorCheck(minPrice: self.currentMinPrice, maxPrice: self.currentMaxPrice)
         }
 
         minPriceDropDown.didSelect { [weak self] selectedText, index, id in
@@ -143,6 +153,8 @@ class CarPricePagingViewController: UIViewController {
             if let currentVC = pagingViewController.pageViewController.selectedViewController as? CarPriceCollectionViewController {
                 currentVC.updateData(newMake: self.searchBar.text ?? "", newMaxPrice: self.maxPriceDropDown.text ?? "", newMinPrice: self.minPriceDropDown.text ?? "")
             }
+            
+            priceErrorCheck(minPrice: self.currentMinPrice, maxPrice: self.currentMaxPrice)
         }
         
         // Add tap gesture to hide the keyboard
@@ -190,6 +202,20 @@ class CarPricePagingViewController: UIViewController {
         if let item = currentItem as? CarPricePagingItem {
             // Force to recreate and setup current page
             pagingViewController.reloadData(around: item)
+        }
+    }
+    
+    private func priceErrorCheck(minPrice: String, maxPrice: String) {
+        // Infinite price never wrong
+        if maxPrice == "♾️" {
+            return
+        }
+        
+        guard let min = Int(minPrice), let max = Int(maxPrice) else {
+            return
+        }
+        if min > max {
+            present(priceErrorAlertController, animated: true, completion: nil)
         }
     }
     
