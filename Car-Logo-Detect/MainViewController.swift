@@ -18,15 +18,16 @@ class MainViewController: UIViewController {
         let title = UILabel()
         title.text = "Car Logo Detect"
         title.textAlignment = .center
-        title.font = UIFont.boldSystemFont(ofSize: 48)
+        title.font = UIFont.boldSystemFont(ofSize: 41)
         title.backgroundColor = .clear
+        title.textColor = .systemBlue
         return title
     }()
     
     private lazy var aboutButton: UIButton = {
         let button = UIButton()
         button.setTitle("About", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.setTitleColor(.systemBlue, for: .normal)
         button.backgroundColor = .clear
         return button
@@ -58,7 +59,7 @@ class MainViewController: UIViewController {
     private lazy var priceButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "dollarsign.circle"), for: .normal)
-        button.tintColor = .systemYellow
+        button.tintColor = .systemBlue
         button.backgroundColor = .clear
         button.layer.cornerRadius = 32
         button.imageView?.contentMode = .scaleAspectFill
@@ -70,7 +71,7 @@ class MainViewController: UIViewController {
     private lazy var aiButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "message.circle"), for: .normal)
-        button.tintColor = .systemRed
+        button.tintColor = .systemBlue
         button.backgroundColor = .clear
         button.layer.cornerRadius = 32
         button.imageView?.contentMode = .scaleAspectFill
@@ -99,6 +100,7 @@ class MainViewController: UIViewController {
         mainTitle.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(200)
+            make.width.equalTo(300)
         }
         
         aboutButton.snp.makeConstraints { make in
@@ -109,30 +111,32 @@ class MainViewController: UIViewController {
         photosButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(mainTitle).offset(250)
-            make.width.equalTo(200)
+            make.width.equalTo(300)
+            make.height.equalTo(50)
         }
         
         drawButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(photosButton).offset(100)
-            make.width.equalTo(200)
+            make.top.equalTo(photosButton).offset(120)
+            make.width.equalTo(300)
+            make.height.equalTo(50)
         }
         
         wikiButton.snp.makeConstraints { make in
             make.leading.equalTo(drawButton)
-            make.top.equalTo(drawButton).offset(100)
+            make.top.equalTo(drawButton).offset(120)
             make.width.height.equalTo(64)
         }
         
         priceButton.snp.makeConstraints { make in
             make.trailing.equalTo(drawButton)
-            make.top.equalTo(drawButton).offset(100)
+            make.top.equalTo(wikiButton)
             make.width.height.equalTo(64)
         }
         
         aiButton.snp.makeConstraints { make in
             make.centerX.equalTo(drawButton)
-            make.top.equalTo(priceButton).offset(100)
+            make.top.equalTo(wikiButton)
             make.width.height.equalTo(64)
         }
     }

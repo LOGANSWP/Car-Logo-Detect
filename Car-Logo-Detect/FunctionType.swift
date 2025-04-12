@@ -24,9 +24,9 @@ enum FunctionType {
     var bgColor: UIColor {
         switch self {
         case .photos:
-            return .blue
+            return .clear
         case .draw:
-            return .red
+            return .clear
         }
     }
 }
