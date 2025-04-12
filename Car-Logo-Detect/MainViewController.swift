@@ -13,6 +13,18 @@ import ZLPhotoBrowser
 
 class MainViewController: UIViewController {
     private let disposeBag = DisposeBag()
+    
+    private lazy var carSign: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "car"), for: .normal)
+        button.tintColor = .systemBlue
+        button.backgroundColor = .clear
+        button.imageView?.contentMode = .scaleAspectFill
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        button.isEnabled = false
+        return button
+    }()
 
     private lazy var mainTitle: UILabel = {
         let title = UILabel()
@@ -89,6 +101,7 @@ class MainViewController: UIViewController {
     private func setupViews() {
         view.backgroundColor = .white
         
+        view.addSubview(carSign)
         view.addSubview(mainTitle)
         view.addSubview(aboutButton)
         view.addSubview(photosButton)
@@ -97,9 +110,16 @@ class MainViewController: UIViewController {
         view.addSubview(priceButton)
         view.addSubview(aiButton)
         
+        carSign.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalToSuperview().offset(100)
+            make.height.equalTo(128)
+            make.width.equalTo(150)
+        }
+        
         mainTitle.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(200)
+            make.top.equalTo(carSign.snp.bottom).offset(75)
             make.width.equalTo(300)
         }
         
@@ -110,21 +130,21 @@ class MainViewController: UIViewController {
         
         photosButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(mainTitle).offset(250)
+            make.top.equalTo(mainTitle).offset(200)
             make.width.equalTo(300)
             make.height.equalTo(50)
         }
         
         drawButton.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(photosButton).offset(120)
+            make.top.equalTo(photosButton).offset(100)
             make.width.equalTo(300)
             make.height.equalTo(50)
         }
         
         wikiButton.snp.makeConstraints { make in
             make.leading.equalTo(drawButton)
-            make.top.equalTo(drawButton).offset(120)
+            make.top.equalTo(drawButton).offset(100)
             make.width.height.equalTo(64)
         }
         
